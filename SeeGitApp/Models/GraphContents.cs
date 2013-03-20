@@ -47,6 +47,10 @@
                     {
                         var source = Vertices.GetValueOrDefault(e.Source);
                         var target = Vertices.GetValueOrDefault(e.Target);
+                        if (source == null || target == null)
+                        {
+                            return;
+                        }
                         var edge = new GitEdge(source, target, e.Tag);
                         if (edges.ContainsKey(edge.Key))
                         {
