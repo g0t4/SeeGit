@@ -1,5 +1,6 @@
 ﻿namespace SeeGit.Models
 {
+    using System;
     using BclExtensionMethods;
     using LibGit2Sharp;
 
@@ -8,6 +9,7 @@
         public string GitRepositoryPath { get; private set; }
         private readonly Repository _repository;
         private RepositoryGraph _graph = new RepositoryGraph();
+        private GraphParameters _parameters;
 
         public RepositoryGraphBuilder(string gitRepositoryPath)
         {
@@ -21,8 +23,9 @@
             }
         }
 
-        public RepositoryGraph Graph()
+        public RepositoryGraph Graph(GraphParameters parameters)
         {
+            _parameters = parameters;
             if (_repository == null)
             {
                 return _graph;
@@ -44,9 +47,12 @@
             }
             _graph.AddObject(commitVertex);
             commit.Parents.ForEach(AddCommit);
-            AddTree(commit.Tree);
-            commit.Parents.ForEach(p => _graph.AddObjectEdge(commit.Sha, p.Sha));
-            _graph.AddObjectEdge(commit.Sha, commit.Tree.Sha);
+            commit.Parents.ForEach(p => _graph.AddObjectEdge(commit.Sha, p.Sha, null));
+            if (_parameters.IncludeCommitContent)
+            {
+                AddTree(commit.Tree);
+                _graph.AddObjectEdge(commit.Sha, commit.Tree.Sha, "/");
+            }
         }
 
         private void AddTree(Tree tree)
@@ -57,10 +63,25 @@
                 return;
             }
             _graph.AddObject(treeVertex);
-            tree.Trees.ForEach(AddTree);
-            tree.Blobs.ForEach(AddBlob);
-            tree.Trees.ForEach(t => _graph.AddObjectEdge(tree.Sha, t.Sha));
-            tree.Blobs.ForEach(b => _graph.AddObjectEdge(tree.Sha, b.Sha));
+            tree.ForEach(e => AddTreeEntry(tree, e));
+        }
+
+        private void AddTreeEntry(Tree tree, TreeEntry entry)
+        {
+            if (entry.Target is Tree)
+            {
+                AddTree(entry.Target as Tree);
+                _graph.AddObjectEdge(tree.Sha, entry.Target.Sha, entry.Name);
+            }
+            else if (entry.Target is Blob)
+            {
+                AddBlob(entry.Target as Blob);
+                _graph.AddObjectEdge(tree.Sha, entry.Target.Sha, entry.Name);
+            }
+            else
+            {
+                throw new NotSupportedException("Invalid tree entry, not supported: " + entry.Target.GetType());
+            }
         }
 
         private void AddBlob(Blob blob)

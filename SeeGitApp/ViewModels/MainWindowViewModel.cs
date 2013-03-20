@@ -9,6 +9,7 @@
     {
         private RepositoryGraph _graph;
         private string _repositoryPath;
+        private GraphParameters _graphParameters = new GraphParameters();
 
         private IRepositoryGraphBuilder _graphBuilder;
         // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
@@ -54,6 +55,16 @@
             }
         }
 
+        public GraphParameters GraphParameters
+        {
+            get { return _graphParameters; }
+            private set
+            {
+                _graphParameters = value;
+                RaisePropertyChanged(() => GraphParameters);
+            }
+        }
+
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
@@ -90,7 +101,7 @@
 
         public void Refresh()
         {
-            Graph = _graphBuilder.Graph();
+            Graph = _graphBuilder.Graph(GraphParameters);
         }
     }
 }

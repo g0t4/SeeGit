@@ -108,6 +108,7 @@
     <Compile Include="Models\BlobVertex.cs" />
     <Compile Include="Models\BranchVertex.cs" />
     <Compile Include="Models\CommitVertex.cs" />
+    <Compile Include="Models\GraphParameters.cs" />
     <Compile Include="Models\ReferenceVertex.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="VertexTemplateSelector.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\EdgeLabelControl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +138,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Edge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Vertex.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

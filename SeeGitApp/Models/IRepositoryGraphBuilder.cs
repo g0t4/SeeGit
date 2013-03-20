@@ -4,6 +4,6 @@
 
     public interface IRepositoryGraphBuilder
     {
-        RepositoryGraph Graph();
+        RepositoryGraph Graph(GraphParameters graphParameters);
     }
 }

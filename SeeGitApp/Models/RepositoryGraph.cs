@@ -32,16 +32,22 @@
 
         private IDictionary<string, GitEdge> _ObjectEdges = new Dictionary<string, GitEdge>();
 
-        public void AddObjectEdge(string sourceKey, string targetKey)
+        public void AddObjectEdge(string sourceKey, string targetKey, string tag)
         {
             var edgeKey = GitEdge.GetEdgeKey(sourceKey, targetKey);
-            if (_ObjectEdges.ContainsKey(edgeKey))
+            var edge = _ObjectEdges.GetValueOrDefault(edgeKey);
+            if (edge != null)
             {
+                if (edge.Tag.Contains(tag))
+                {
+                    return;
+                }
+                edge.Tag.Add(tag);
                 return;
             }
             var source = _Objects.GetValueOrDefault(sourceKey);
             var target = _Objects.GetValueOrDefault(targetKey);
-            var edge = new GitEdge(source, target);
+            edge = new GitEdge(source, target, tag);
             _ObjectEdges.Add(edge.Key, edge);
             AddEdge(edge);
         }

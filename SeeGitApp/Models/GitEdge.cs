@@ -1,11 +1,14 @@
 ﻿namespace SeeGit.Models
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using BclExtensionMethods;
     using QuickGraph;
 
-    public class GitEdge : Edge<GitVertex>
+    public class GitEdge : TaggedEdge<GitVertex, IList<string>>
     {
-        public GitEdge(GitVertex source, GitVertex target)
-            : base(source, target)
+        public GitEdge(GitVertex source, GitVertex target, string tag)
+            : base(source, target, (tag == null ? new string[] {} : new[] {tag}).ToList())
         {
             SourceKey = source.Key;
             TargetKey = target.Key;
@@ -17,6 +20,11 @@
         public string Key
         {
             get { return GetEdgeKey(SourceKey, TargetKey); }
+        }
+
+        public string Tags
+        {
+            get { return Tag.StringJoin(", "); }
         }
 
         public static string GetEdgeKey(string sourceKey, string targetKey)

@@ -43,7 +43,7 @@
                 repository.AddObject(commitA);
                 repository.AddObject(commitB);
 
-                repository.AddObjectEdge(commitA.Sha, commitB.Sha);
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, null);
 
                 var edge = repository.Edges.Single();
                 Expect(edge.Source, Is.EqualTo(commitA));
@@ -58,11 +58,43 @@
                 var commitB = new CommitVertex("shaB", string.Empty);
                 repository.AddObject(commitA);
                 repository.AddObject(commitB);
-                repository.AddObjectEdge(commitA.Sha, commitB.Sha);
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, null);
 
-                repository.AddObjectEdge(commitA.Sha, commitB.Sha);
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, null);
 
                 Expect(repository.Edges.Count(), Is.EqualTo(1));
+            }
+
+            [Test]
+            public void Ignores_SameEdgeSameTag()
+            {
+                var repository = new RepositoryGraph();
+                var commitA = new CommitVertex("shaA", string.Empty);
+                var commitB = new CommitVertex("shaB", string.Empty);
+                repository.AddObject(commitA);
+                repository.AddObject(commitB);
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, "tag1");
+
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, "tag1");
+
+                Expect(repository.Edges.Single().Tag.Count(), Is.EqualTo(1));
+            }
+
+            [Test]
+            public void AddsSecondTag_SameEdgeDifferentTag()
+            {
+                var repository = new RepositoryGraph();
+                var commitA = new CommitVertex("shaA", string.Empty);
+                var commitB = new CommitVertex("shaB", string.Empty);
+                repository.AddObject(commitA);
+                repository.AddObject(commitB);
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, "tag1");
+
+                repository.AddObjectEdge(commitA.Sha, commitB.Sha, "tag2");
+
+                var tag = repository.Edges.Single().Tag;
+                Expect(tag.First(), Is.EqualTo("tag1"));
+                Expect(tag.Last(), Is.EqualTo("tag2"));
             }
         }
     }

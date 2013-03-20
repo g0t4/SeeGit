@@ -7,13 +7,13 @@
     {
         public DesignTimeMainWindowViewModel() : base(Dispatcher.CurrentDispatcher, _ => new DesignTimeGraphBuilder())
         {
-            Graph = new DesignTimeGraphBuilder().Graph();
+            Graph = new DesignTimeGraphBuilder().Graph(new GraphParameters());
         }
     }
 
     public class DesignTimeGraphBuilder : IRepositoryGraphBuilder
     {
-        public RepositoryGraph Graph()
+        public RepositoryGraph Graph(GraphParameters graphParameters)
         {
             var graph = new RepositoryGraph();
             var commits = new GitVertex[]
@@ -29,9 +29,9 @@
                 };
 
             graph.AddVertexRange(commits);
-            graph.AddEdge(new GitEdge(commits[1], commits[2]));
-            graph.AddEdge(new GitEdge(commits[0], commits[1]));
-            graph.AddEdge(new GitEdge(commits[3], commits[2]));
+            graph.AddEdge(new GitEdge(commits[1], commits[2], null));
+            graph.AddEdge(new GitEdge(commits[0], commits[1], null));
+            graph.AddEdge(new GitEdge(commits[3], commits[2], null));
             graph.LayoutAlgorithmType = "EfficientSugiyama";
             return graph;
         }

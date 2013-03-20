@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <local:VertexTemplateSelector xmlns:local="clr-namespace:SeeGit"
+                                xmlns:models="clr-namespace:SeeGit.Models"
+                                x:Key="VertexTemplate">
+    <local:VertexTemplateSelector.Resources>
+      <DataTemplate x:Key="CommitVertexTemplate" DataType="{x:Type models:CommitVertex}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
+        </StackPanel>
+      </DataTemplate>
+
+      <DataTemplate x:Key="BranchVertexTemplate" DataType="{x:Type models:BranchVertex}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+        </StackPanel>
+      </DataTemplate>
+
+      <DataTemplate x:Key="TreeVertexTemplate" DataType="{x:Type models:TreeVertex}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
+        </StackPanel>
+      </DataTemplate>
+
+      <DataTemplate x:Key="BlobVertexTemplate" DataType="{x:Type models:BlobVertex}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
+        </StackPanel>
+      </DataTemplate>
+    </local:VertexTemplateSelector.Resources>
+  </local:VertexTemplateSelector>
+
+  <Style
+    xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+    xmlns:extbehaviour="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions"
+    TargetType="{x:Type graphsharp:VertexControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+          <Border BorderBrush="White"
+                  Background="Black"
+                  BorderThickness="2"
+                  CornerRadius="10,10,10,10"
+                  Padding="{TemplateBinding Padding}">
+            <ContentPresenter Content="{TemplateBinding Vertex}"
+                              ContentTemplateSelector="{StaticResource VertexTemplate}" />
+
+            <Border.Effect>
+              <DropShadowEffect BlurRadius="2" Color="LightGray"
+                                Opacity="0.3" Direction="315" />
+            </Border.Effect>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="extbehaviour:DragBehaviour.IsDragEnabled" Value="True" />
+    <Setter Property="extbehaviour:DragBehaviour.X"
+            Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.X),Mode=TwoWay}" />
+    <Setter Property="extbehaviour:DragBehaviour.Y"
+            Value="{Binding RelativeSource={RelativeSource Self},Path=(graphsharp:GraphCanvas.Y),Mode=TwoWay}" />
+  </Style>
+</ResourceDictionary>

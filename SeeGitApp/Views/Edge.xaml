@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Converters:EdgeRouteToPathConverter
+    xmlns:Converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls" x:Key="routeToPathConverter" />
+  <Style xmlns:views="clr-namespace:SeeGit.Views"
+         xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+         TargetType="{x:Type graphsharp:EdgeControl}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type graphsharp:EdgeControl}">
+          <Canvas>
+            <Path Stroke="{TemplateBinding Foreground}"
+                  StrokeThickness="1"
+                  MinWidth="1"
+                  MinHeight="1"
+                  x:Name="edgePath">
+              <Path.Data>
+                <PathGeometry>
+                  <PathGeometry.Figures>
+                    <MultiBinding Converter="{StaticResource routeToPathConverter}">
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Source.(graphsharp:GraphCanvas.X)" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Source.(graphsharp:GraphCanvas.Y)" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Source.ActualWidth" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Source.ActualHeight" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Target.(graphsharp:GraphCanvas.X)" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Target.(graphsharp:GraphCanvas.Y)" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Target.ActualWidth" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="Target.ActualHeight" />
+                      <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                               Path="RoutePoints" />
+                    </MultiBinding>
+                  </PathGeometry.Figures>
+                </PathGeometry>
+              </Path.Data>
+            </Path>
+            <views:EdgeLabelControl
+              Foreground="Black"
+              Content="{Binding Edge.Tags, RelativeSource={RelativeSource TemplatedParent}}" />
+          </Canvas>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>
