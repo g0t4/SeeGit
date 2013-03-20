@@ -101,6 +101,7 @@
 
         public void Refresh()
         {
+			// todo can't we split updating the UI from reading the repo and run this on a background thread?
             Graph = _graphBuilder.Graph(GraphParameters);
         }
     }
