@@ -6,6 +6,9 @@
     {
         public TagAnnotationVertex(TagAnnotation tagAnnotation) : base(tagAnnotation)
         {
+            Message = tagAnnotation.Message;
         }
+
+        public string Message { get; set; }
     }
 }

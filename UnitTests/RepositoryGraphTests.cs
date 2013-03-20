@@ -97,5 +97,84 @@
                 Expect(tag.Last(), Is.EqualTo("tag2"));
             }
         }
+
+        public class AddReference : AssertionHelper
+        {
+            [Test]
+            public void Adds_NewReference()
+            {
+                var repository = new RepositoryGraph();
+                var reference = new ReferenceVertex("canonicalName", "targetId");
+
+                repository.AddReference(reference);
+
+                Expect(repository.Vertices.Single(), Is.EqualTo(reference));
+            }
+
+            [Test]
+            public void Updates_ChangedReference()
+            {
+                var repository = new RepositoryGraph();
+                var reference = new ReferenceVertex("canonicalName", "targetId");
+                var updatedReference = new ReferenceVertex("canonicalName", "targetId2");
+                repository.AddReference(reference);
+
+                repository.AddReference(updatedReference);
+
+                Expect(repository.Vertices.Single(), Is.EqualTo(updatedReference));
+            }
+
+            [Test]
+            public void Ignores_UnchangedReference()
+            {
+                var repository = new RepositoryGraph();
+                var reference = new ReferenceVertex("canonicalName", "targetId");
+                var updatedReference = new ReferenceVertex("canonicalName", "targetId");
+                repository.AddReference(reference);
+
+                repository.AddReference(updatedReference);
+
+                Expect(ReferenceEquals(repository.Vertices.Single(), reference));
+            }
+        }
+
+        // Objects
+        // Tag Annotation -> points at one thing (any type)
+
+        // Refs
+        // Tag -> points at one thing (any type)
+        // Branch -> points at one Tip commit
+
+        public class RemoveReferencesNotIn : AssertionHelper
+        {
+            [Test]
+            public void RemovesReferenceAndEdge()
+            {
+                var repository = new RepositoryGraph();
+                var commit = new CommitVertex("sha1", string.Empty);
+                repository.AddObject(commit);
+                var branch = new ReferenceVertex("canonicalName", "sha1");
+                repository.AddReference(branch);
+
+                repository.RemoveReferencesNotIn(new string[] {});
+
+                Expect(repository.Edges, Is.Empty);
+                Expect(repository.Vertices.Single(), Is.EqualTo(commit));
+            }
+
+            [Test]
+            public void Leaves_Reference()
+            {
+                var repository = new RepositoryGraph();
+                var commit = new CommitVertex("sha1", string.Empty);
+                repository.AddObject(commit);
+                var branch = new ReferenceVertex("canonicalName", "sha1");
+                repository.AddReference(branch);
+
+                repository.RemoveReferencesNotIn(new[] {"canonicalName"});
+
+                Expect(repository.Vertices.Contains(branch));
+            }
+        }
     }
 }

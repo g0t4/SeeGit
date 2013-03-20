@@ -24,8 +24,8 @@
                     new CommitVertex("aa3823ca1", "Added readme"),
                     new CommitVertex("9e21435fa", "Branching")
                         {Message = "This is a long form description of the commit"},
-                    new BranchVertex("refs/head/master", "master"),
-                    new BranchVertex("remotes/origin/master", "origin/master"),
+                    new ReferenceVertex("refs/head/master", "c34173273"),
+                    new ReferenceVertex("remotes/origin/master", "c34173273"),
                 };
 
             graph.AddVertexRange(commits);

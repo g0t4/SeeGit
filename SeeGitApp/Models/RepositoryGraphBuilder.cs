@@ -1,6 +1,7 @@
 ﻿namespace SeeGit.Models
 {
     using System;
+    using System.Linq;
     using BclExtensionMethods;
     using LibGit2Sharp;
 
@@ -32,10 +33,37 @@
             }
 
             _repository.Commits
-                       .QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time})
+                       .QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time, Since = _repository.Refs})
                        .ForEach(AddCommit);
-
+            AddTagAnnotations();
+            AddReferences();
+            // todo unreachable commits
             return _graph;
+        }
+
+        private void AddTagAnnotations()
+        {
+            _repository.Tags
+                       .Where(t => t.Annotation != null)
+                       .ForEach(AddTagAnnotation);
+        }
+
+        private void AddTagAnnotation(Tag tag)
+        {
+            var vertex = new TagAnnotationVertex(tag.Annotation);
+            _graph.AddObject(vertex);
+            _graph.AddObjectEdge(tag.Annotation.Sha, tag.Annotation.Target.Sha, null);
+        }
+
+        private void AddReferences()
+        {
+            var references = _repository.Refs.Union(new[] {_repository.Refs["HEAD"]})
+                                        .Select(b => new ReferenceVertex(b.CanonicalName, b.TargetIdentifier))
+                                        .ToArray();
+            _graph.RemoveReferencesNotIn(references.Select(r => r.CanonicalName).ToArray());
+
+            references.ForEach(b => _graph.AddReference(b));
+            references.ForEach(b => _graph.AddReferenceEdge(b));
         }
 
         private void AddCommit(Commit commit)

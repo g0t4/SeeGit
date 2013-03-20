@@ -61,5 +61,51 @@
             _ObjectEdges.Add(edge.Key, edge);
             AddEdge(edge);
         }
+
+        private IDictionary<string, ReferenceVertex> _References = new Dictionary<string, ReferenceVertex>();
+        private IDictionary<string, GitEdge> _ReferenceEdges = new Dictionary<string, GitEdge>();
+
+        public void RemoveReferencesNotIn(IEnumerable<string> canonicalNames)
+        {
+            _ReferenceEdges
+                .ToArray()
+                .ForEach(e =>
+                    {
+                        _ReferenceEdges.Remove(e.Key);
+                        RemoveEdge(e.Value);
+                    });
+            _References
+                .Where(e => !canonicalNames.Contains(e.Key))
+                .ToArray()
+                .ForEach(r =>
+                    {
+                        _References.Remove(r.Key);
+                        RemoveVertex(r.Value);
+                    });
+        }
+
+        public void AddReference(ReferenceVertex reference)
+        {
+            if (_References.ContainsKey(reference.CanonicalName))
+            {
+                var existing = _References[reference.CanonicalName];
+                if (existing.TargetId == reference.TargetId)
+                {
+                    return;
+                }
+                RemoveVertex(existing);
+            }
+            _References[reference.CanonicalName] = reference;
+            AddVertex(reference);
+        }
+
+        public void AddReferenceEdge(ReferenceVertex reference)
+        {
+            var target = ((GitVertex) _Objects.GetValueOrDefault(reference.TargetId))
+                         ?? _References.GetValueOrDefault(reference.TargetId);
+            var edge = new GitEdge(reference, target, null);
+            _ReferenceEdges[reference.CanonicalName] = edge;
+            AddEdge(edge);
+        }
     }
 }

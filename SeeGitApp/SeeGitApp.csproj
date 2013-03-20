@@ -106,7 +106,6 @@
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Models\BlobVertex.cs" />
-    <Compile Include="Models\BranchVertex.cs" />
     <Compile Include="Models\CommitVertex.cs" />
     <Compile Include="Models\GraphParameters.cs" />
     <Compile Include="Models\ReferenceVertex.cs" />
@@ -120,7 +119,6 @@
     <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />
     <Compile Include="Models\RepositoryGraph.cs" />
     <Compile Include="Models\TagAnnotationVertex.cs" />
-    <Compile Include="Models\TagVertex.cs" />
     <Compile Include="Models\TreeVertex.cs" />
     <Compile Include="VertexTemplateSelector.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
