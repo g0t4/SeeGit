@@ -1,8 +1,8 @@
-﻿using QuickGraph;
-
-namespace SeeGit
+﻿namespace SeeGit.Models
 {
-    public class RepositoryGraph : BidirectionalGraph<CommitVertex, CommitEdge>
+    using QuickGraph;
+
+    public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>
     {
         public string LayoutAlgorithmType { get; set; }
     }

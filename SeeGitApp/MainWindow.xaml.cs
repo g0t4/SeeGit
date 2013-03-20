@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Input;
-
-namespace SeeGit
+﻿namespace SeeGit
 {
+    using System;
+    using System.IO;
+    using System.Windows;
+    using System.Windows.Input;
+    using Models;
+
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;

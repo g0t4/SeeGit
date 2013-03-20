@@ -1,14 +1,8 @@
-﻿using GraphSharp.Controls;
-using SeeGit.Models;
-
-namespace SeeGit
+﻿namespace SeeGit.Models
 {
-    public class RepositoryGraphLayout : GraphLayout<CommitVertex, CommitEdge, RepositoryGraph>
+    using GraphSharp.Controls;
+
+    public class RepositoryGraphLayout : GraphLayout<GitVertex, GitEdge, RepositoryGraph>
     {
-        public RepositoryGraphLayout()
-        {
-            HighlightAlgorithmFactory =
-                new ReachableHighlightAlgorithmFactory<CommitVertex, CommitEdge, RepositoryGraph>();
-        }
     }
 }

@@ -1,9 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Windows.Threading;
-
-namespace SeeGit
+﻿namespace SeeGit
 {
+    using System;
+    using System.IO;
+    using System.Windows.Threading;
+    using Models;
+
     public class MainWindowViewModel : NotifyPropertyChanged
     {
         private RepositoryGraph _graph;
@@ -56,8 +57,8 @@ namespace SeeGit
         public void MonitorRepository(string repositoryWorkingPath)
         {
             if (repositoryWorkingPath == null) return;
-            
-            string gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
+
+            var gitPath = ModelExtensions.GetGitRepositoryPath(repositoryWorkingPath);
             if (!Directory.Exists(gitPath))
             {
                 MonitorForRepositoryCreation(repositoryWorkingPath);
@@ -79,13 +80,13 @@ namespace SeeGit
         private void MonitorForRepositoryCreation(string repositoryWorkingPath)
         {
             ModelExtensions.CreateGitRepositoryCreationObservable(repositoryWorkingPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
+                           .Subscribe(_ => _uiDispatcher.Invoke(new Action(() => MonitorRepository(repositoryWorkingPath))));
         }
 
         private void MonitorForRepositoryChanges(string gitRepositoryPath)
         {
             ModelExtensions.CreateGitRepositoryChangesObservable(gitRepositoryPath)
-                .Subscribe(_ => _uiDispatcher.Invoke(new Action(Refresh)));
+                           .Subscribe(_ => _uiDispatcher.Invoke(new Action(Refresh)));
         }
 
         public void Refresh()

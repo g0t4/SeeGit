@@ -1,114 +1,23 @@
-﻿using System;
-using System.Diagnostics;
-using SeeGit.Models;
-
-namespace SeeGit
+﻿namespace SeeGit.Models
 {
-    [DebuggerDisplay("{Sha}: {Message}")]
-    public class CommitVertex : GitObject<CommitVertex>, IEquatable<CommitVertex>
+    using LibGit2Sharp;
+
+    public class CommitVertex : ObjectVertex
     {
-        public CommitVertex(string sha, string message)
+        public CommitVertex(string sha1, string messageShort) : base(sha1)
         {
-            Sha = sha;
-            Message = message;
-            Branches = new BranchCollection();
-            Branches.CollectionChanged += (o, e) => RaisePropertyChanged(() => HasBranches);
+            Sha = sha1;
+            MessageShort = messageShort;
         }
 
-        public string Sha
+        public CommitVertex(Commit commit)
+            : base(commit)
         {
-            get;
-            private set;
+            MessageShort = commit.MessageShort;
+            Message = commit.Message;
         }
 
-        public string ShortSha
-        {
-            get
-            {
-                return Sha.AtMost(8);
-            }
-        }
-
-        public string Message
-        {
-            get;
-            private set;
-        }
-        public string Description
-        {
-            get;
-            set;
-        }
-
-        public BranchCollection Branches
-        {
-            get;
-            private set;
-        }
-
-        public bool HasBranches
-        {
-            get
-            {
-                return Branches.Count > 0;
-            }
-        }
-
-        private bool _onCurrentBranch;
-
-        public bool OnCurrentBranch
-        {
-            get
-            {
-                return _onCurrentBranch;
-            }
-            set
-            {
-                _onCurrentBranch = value;
-                RaisePropertyChanged(() => OnCurrentBranch);
-            }
-        }
-
-        public override bool Equals(object obj)
-        {
-            return this.Equals(obj as CommitVertex);
-        }
-
-        public override bool Equals(CommitVertex other)
-        {
-            if(ReferenceEquals(null, other))
-                return false;
-            if(ReferenceEquals(this, other))
-                return true;
-            return Equals(other.Sha, Sha);
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0}: {1}", ShortSha, Message);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = (Sha != null ? Sha.GetHashCode() : 0);
-                result = (result * 397) ^ (Message != null ? Message.GetHashCode() : 0);
-                result = (result * 397) ^ (Description != null ? Description.GetHashCode() : 0);
-                return result;
-            }
-        }
-
-        public static bool operator ==(CommitVertex commit, CommitVertex other)
-        {
-            if(ReferenceEquals(commit, null)) return ReferenceEquals(other, null);
-
-            return commit.Equals(other);
-        }
-
-        public static bool operator !=(CommitVertex commit, CommitVertex other)
-        {
-            return !(commit == other);
-        }
+        public string MessageShort { get; set; }
+        public string Message { get; set; }
     }
 }

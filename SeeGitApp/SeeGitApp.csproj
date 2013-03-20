@@ -99,23 +99,27 @@
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
     <Compile Include="Extensions\CommitAdornerBehavior.cs" />
-    <Compile Include="Extensions\LibGit2Extensions.cs" />
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
-    <Compile Include="Models\BranchCollection.cs" />
-    <Compile Include="Models\BranchReference.cs" />
-    <Compile Include="Models\GitObject.cs" />
+    <Compile Include="Models\BlogVertex.cs" />
+    <Compile Include="Models\BranchVertex.cs" />
+    <Compile Include="Models\CommitVertex.cs" />
+    <Compile Include="Models\ReferenceVertex.cs" />
+    <Compile Include="Models\RepositoryGraphLayout.cs" />
+    <Compile Include="Models\RepositoryGraphBuilder.cs" />
+    <Compile Include="Models\GitEdge.cs" />
+    <Compile Include="Models\ObjectVertex.cs" />
+    <Compile Include="Models\GitVertex.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithm.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />
-    <Compile Include="Models\RepositoryGraphBuilder.cs" />
-    <Compile Include="Models\RepositoryGraphLayout.cs" />
+    <Compile Include="Models\RepositoryGraph.cs" />
+    <Compile Include="Models\TagAnnotationVertex.cs" />
+    <Compile Include="Models\TagVertex.cs" />
+    <Compile Include="Models\TreeVertex.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Views\CommitVertexView.xaml.cs">
-      <DependentUpon>CommitVertexView.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,17 +128,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\CommitEdge.cs" />
-    <Compile Include="Models\RepositoryGraph.cs" />
-    <Compile Include="Models\CommitVertex.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CommitVertexView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
