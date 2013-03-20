@@ -107,6 +107,7 @@
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Models\BlobVertex.cs" />
     <Compile Include="Models\CommitVertex.cs" />
+    <Compile Include="Models\GraphContents.cs" />
     <Compile Include="Models\GraphParameters.cs" />
     <Compile Include="Models\ReferenceVertex.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
