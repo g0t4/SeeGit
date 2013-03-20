@@ -10,11 +10,33 @@
         Title="SeeGit" Height="465" Width="708" mc:Ignorable="d">
   <Window.Resources>
 
-    <DataTemplate x:Key="demoTemplate" DataType="{x:Type models:CommitVertex}">
-      <StackPanel Orientation="Horizontal" Margin="5">
-        <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
-      </StackPanel>
-    </DataTemplate>
+    <local:VertexTemplateSelector x:Key="VertexTemplate">
+      <local:VertexTemplateSelector.Resources>
+        <DataTemplate x:Key="CommitVertexTemplate" DataType="{x:Type models:CommitVertex}">
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BranchVertexTemplate" DataType="{x:Type models:BranchVertex}">
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TreeVertexTemplate" DataType="{x:Type models:TreeVertex}">
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BlobVertexTemplate" DataType="{x:Type models:BlobVertex}">
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+        </DataTemplate>
+      </local:VertexTemplateSelector.Resources>
+    </local:VertexTemplateSelector>
 
     <Style TargetType="{x:Type graphsharp:VertexControl}">
       <Setter Property="Template">
@@ -26,7 +48,7 @@
                     CornerRadius="10,10,10,10"
                     Padding="{TemplateBinding Padding}">
               <ContentPresenter Content="{TemplateBinding Vertex}"
-                                ContentTemplate="{StaticResource demoTemplate}" />
+                                ContentTemplateSelector="{StaticResource VertexTemplate}" />
 
               <Border.Effect>
                 <DropShadowEffect BlurRadius="2" Color="LightGray"
@@ -78,7 +100,7 @@
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
-      <models:RepositoryGraphLayout x:Name="graphLayout" Margin="10" Graph="{Binding Graph}"
+      <models:RepositoryGraphLayout x:Name="GraphLayout" Margin="10" Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}"
                                     OverlapRemovalAlgorithmType="FSA"
                                     FlowDirection="LeftToRight" />

@@ -1,16 +1,13 @@
 ﻿namespace SeeGit.Models
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using BclExtensionMethods;
     using LibGit2Sharp;
 
     public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
         public string GitRepositoryPath { get; private set; }
-        private readonly RepositoryGraph _graph = new RepositoryGraph();
         private readonly Repository _repository;
-        private readonly Dictionary<string, ObjectVertex> _vertices = new Dictionary<string, ObjectVertex>();
-        private readonly Dictionary<GitEdge, GitEdge> _edges = new Dictionary<GitEdge, GitEdge>();
+        private RepositoryGraph _graph = new RepositoryGraph();
 
         public RepositoryGraphBuilder(string gitRepositoryPath)
         {
@@ -26,48 +23,54 @@
 
         public RepositoryGraph Graph()
         {
-            if (_repository == null) return new RepositoryGraph();
-
-            var commits =
-                _repository.Commits.QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time});
-
-            AddCommitsToGraph(commits.First(), null);
-
-            if (_vertices.Count > 1)
+            if (_repository == null)
             {
-                _graph.LayoutAlgorithmType = "EfficientSugiyama";
+                return _graph;
             }
+
+            _repository.Commits
+                       .QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time})
+                       .ForEach(AddCommit);
 
             return _graph;
         }
 
-        private void AddCommitsToGraph(Commit commit, ObjectVertex child)
+        private void AddCommit(Commit commit)
         {
-            var commitVertex = GetCommitVertex(commit);
-            _graph.AddVertex(commitVertex);
-            if (child != null)
+            var commitVertex = new CommitVertex(commit);
+            if (_graph.HasObject(commitVertex))
             {
-                var edge = new GitEdge(child, commitVertex);
-                if (_edges.ContainsKey(edge)) return;
-                _graph.AddEdge(edge);
-                _edges.Add(edge, edge);
+                return;
             }
-
-            foreach (var parent in commit.Parents)
-            {
-                AddCommitsToGraph(parent, commitVertex);
-            }
+            _graph.AddObject(commitVertex);
+            commit.Parents.ForEach(AddCommit);
+            AddTree(commit.Tree);
+            commit.Parents.ForEach(p => _graph.AddObjectEdge(commit.Sha, p.Sha));
+            _graph.AddObjectEdge(commit.Sha, commit.Tree.Sha);
         }
 
-        private ObjectVertex GetCommitVertex(Commit commit)
+        private void AddTree(Tree tree)
         {
-            ObjectVertex commitVertex;
-            if (!_vertices.TryGetValue(commit.Sha, out commitVertex))
+            var treeVertex = new TreeVertex(tree);
+            if (_graph.HasObject(treeVertex))
             {
-                commitVertex = new CommitVertex(commit);
-                _vertices.Add(commit.Sha, commitVertex);
+                return;
             }
-            return commitVertex;
+            _graph.AddObject(treeVertex);
+            tree.Trees.ForEach(AddTree);
+            tree.Blobs.ForEach(AddBlob);
+            tree.Trees.ForEach(t => _graph.AddObjectEdge(tree.Sha, t.Sha));
+            tree.Blobs.ForEach(b => _graph.AddObjectEdge(tree.Sha, b.Sha));
+        }
+
+        private void AddBlob(Blob blob)
+        {
+            var blobVertex = new BlobVertex(blob);
+            if (_graph.HasObject(blobVertex))
+            {
+                return;
+            }
+            _graph.AddObject(blobVertex);
         }
     }
 }

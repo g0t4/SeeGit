@@ -10,6 +10,9 @@
 
         public BranchVertex(Branch branch) : base(branch.CanonicalName, branch.Name)
         {
+            TipSha = branch.Tip.Sha;
         }
+
+        public string TipSha { get; set; }
     }
 }

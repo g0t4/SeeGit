@@ -39,6 +39,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BclExtensionMethods">
+      <HintPath>..\packages\DotNetExtensions-Base.1.1.4713.27166\lib\net40\BclExtensionMethods.dll</HintPath>
+    </Reference>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\GraphSharp.dll</HintPath>
@@ -102,7 +105,7 @@
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
-    <Compile Include="Models\BlogVertex.cs" />
+    <Compile Include="Models\BlobVertex.cs" />
     <Compile Include="Models\BranchVertex.cs" />
     <Compile Include="Models\CommitVertex.cs" />
     <Compile Include="Models\ReferenceVertex.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Models\TagAnnotationVertex.cs" />
     <Compile Include="Models\TagVertex.cs" />
     <Compile Include="Models\TreeVertex.cs" />
+    <Compile Include="VertexTemplateSelector.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">

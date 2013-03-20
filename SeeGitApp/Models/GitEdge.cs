@@ -14,6 +14,21 @@
         public string TargetKey { get; set; }
         public string SourceKey { get; set; }
 
+        public string Key
+        {
+            get { return GetEdgeKey(SourceKey, TargetKey); }
+        }
+
+        public static string GetEdgeKey(string sourceKey, string targetKey)
+        {
+            return targetKey + ".." + sourceKey;
+        }
+
+        public override string ToString()
+        {
+            return Key;
+        }
+
         protected bool Equals(GitEdge other)
         {
             return string.Equals(TargetKey, other.TargetKey) && string.Equals(SourceKey, other.SourceKey);
