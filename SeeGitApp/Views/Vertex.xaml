@@ -6,27 +6,56 @@
                                 x:Key="VertexTemplate">
     <local:VertexTemplateSelector.Resources>
       <DataTemplate x:Key="CommitVertexTemplate" DataType="{x:Type models:CommitVertex}">
-        <StackPanel Orientation="Horizontal" Margin="5">
-          <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
-        </StackPanel>
+        <Border BorderBrush="White"
+                Background="Black"
+                BorderThickness="2"
+                CornerRadius="10,10,10,10"
+                Padding="5">
+          <StackPanel Orientation="Vertical" Margin="5">
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
+            <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+
+          <Border.Effect>
+            <DropShadowEffect BlurRadius="2" Color="LightGray"
+                              Opacity="0.3" Direction="315" />
+
+          </Border.Effect>
+        </Border>
       </DataTemplate>
 
       <DataTemplate x:Key="BranchVertexTemplate" DataType="{x:Type models:BranchVertex}">
-        <StackPanel Orientation="Horizontal" Margin="5">
-          <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
-        </StackPanel>
+        <Border BorderBrush="White"
+                Background="Black"
+                BorderThickness="2"
+                CornerRadius="10,10,10,10"
+                Padding="5">
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+          </StackPanel>
+
+          <Border.Effect>
+            <DropShadowEffect BlurRadius="2" Color="LightGray"
+                              Opacity="0.3" Direction="315" />
+
+          </Border.Effect>
+        </Border>
       </DataTemplate>
 
       <DataTemplate x:Key="TreeVertexTemplate" DataType="{x:Type models:TreeVertex}">
-        <StackPanel Orientation="Horizontal" Margin="5">
-          <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
-        </StackPanel>
+        <Grid Margin="5">
+          <Image Source="../Images/directory.png" />
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ShortSha, Mode=OneWay}"
+                     Foreground="Black" />
+        </Grid>
       </DataTemplate>
 
       <DataTemplate x:Key="BlobVertexTemplate" DataType="{x:Type models:BlobVertex}">
-        <StackPanel Orientation="Horizontal" Margin="5">
-          <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
-        </StackPanel>
+        <Grid Margin="5">
+          <Image Source="../Images/file.png" />
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ShortSha, Mode=OneWay}"
+                     Foreground="Black" />
+        </Grid>
       </DataTemplate>
     </local:VertexTemplateSelector.Resources>
   </local:VertexTemplateSelector>
@@ -38,19 +67,8 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
-          <Border BorderBrush="White"
-                  Background="Black"
-                  BorderThickness="2"
-                  CornerRadius="10,10,10,10"
-                  Padding="{TemplateBinding Padding}">
-            <ContentPresenter Content="{TemplateBinding Vertex}"
-                              ContentTemplateSelector="{StaticResource VertexTemplate}" />
-
-            <Border.Effect>
-              <DropShadowEffect BlurRadius="2" Color="LightGray"
-                                Opacity="0.3" Direction="315" />
-            </Border.Effect>
-          </Border>
+          <ContentPresenter Content="{TemplateBinding Vertex}"
+                            ContentTemplateSelector="{StaticResource VertexTemplate}" />
         </ControlTemplate>
       </Setter.Value>
     </Setter>
