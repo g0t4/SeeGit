@@ -24,18 +24,18 @@ namespace SeeGit
 
             //If we are passed a .git directory, just return it straightaway
             DirectoryInfo pathDirectoryInfo = new DirectoryInfo(path);
-            if (pathDirectoryInfo.Name == ".git")
+            if (pathDirectoryInfo.Name == GitDirectoryName)
             {
                 return path;
             }
 
-            if (!pathDirectoryInfo.Exists) return Path.Combine(path, ".git");
+            if (!pathDirectoryInfo.Exists) return Path.Combine(path, GitDirectoryName);
 
             DirectoryInfo checkIn = pathDirectoryInfo;
 
             while (checkIn != null)
             {
-                string pathToTest = Path.Combine(checkIn.FullName, ".git");
+                string pathToTest = Path.Combine(checkIn.FullName, GitDirectoryName);
                 if (Directory.Exists(pathToTest))
                 {
                     return pathToTest;
@@ -48,12 +48,12 @@ namespace SeeGit
 
             // This is not good, it relies on the rest of the code being ok
             // with getting a non-git repo dir
-            return Path.Combine(path, ".git");
+            return Path.Combine(path, GitDirectoryName);
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
         {
-            string expectedGitDirectory = Path.Combine(path, ".git");
+            string expectedGitDirectory = Path.Combine(path, GitDirectoryName);
             return new FileSystemWatcher(path)
                    {
                        IncludeSubdirectories = false,
