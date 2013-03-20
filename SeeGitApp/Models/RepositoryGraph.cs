@@ -1,6 +1,7 @@
 ﻿namespace SeeGit.Models
 {
     using System.Collections.Generic;
+    using System.Linq;
     using BclExtensionMethods;
     using QuickGraph;
 
@@ -8,7 +9,7 @@
     {
         public RepositoryGraph()
         {
-            LayoutAlgorithmType = "EfficientSugiyama";
+            LayoutAlgorithmType = "Tree";
         }
 
         public string LayoutAlgorithmType { get; set; }
@@ -23,6 +24,15 @@
             }
             AddVertex(@object);
             _Objects.Add(@object.Sha, @object);
+            SetLayoutType();
+        }
+
+        private void SetLayoutType()
+        {
+            if (Vertices.Count() > 1)
+            {
+                LayoutAlgorithmType = "EfficientSugiyama";
+            }
         }
 
         public bool HasObject(ObjectVertex @object)
