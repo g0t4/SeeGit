@@ -4,8 +4,9 @@
     using System.Linq;
     using BclExtensionMethods;
     using LibGit2Sharp;
+    using Vertices;
 
-    public class RepositoryGraphBuilder : IRepositoryGraphBuilder
+	public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
         public string GitRepositoryPath { get; private set; }
         private readonly Repository _repository;

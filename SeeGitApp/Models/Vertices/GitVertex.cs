@@ -1,4 +1,4 @@
-﻿namespace SeeGit.Models
+﻿namespace SeeGit.Models.Vertices
 {
     public abstract class GitVertex : NotifyPropertyChanged
     {

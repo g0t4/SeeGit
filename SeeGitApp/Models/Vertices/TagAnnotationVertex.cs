@@ -1,8 +1,8 @@
-﻿namespace SeeGit.Models
+﻿namespace SeeGit.Models.Vertices
 {
-    using LibGit2Sharp;
+	using LibGit2Sharp;
 
-    public class TagAnnotationVertex : ObjectVertex
+	public class TagAnnotationVertex : ObjectVertex
     {
         public TagAnnotationVertex(TagAnnotation tagAnnotation) : base(tagAnnotation)
         {

@@ -1,8 +1,8 @@
-﻿namespace SeeGit.Models
+﻿namespace SeeGit.Models.Vertices
 {
-    using LibGit2Sharp;
+	using LibGit2Sharp;
 
-    public class CommitVertex : ObjectVertex
+	public class CommitVertex : ObjectVertex
     {
         public CommitVertex(string sha1, string messageShort) : base(sha1)
         {

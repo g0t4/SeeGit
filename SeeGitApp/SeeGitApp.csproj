@@ -105,22 +105,22 @@
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
-    <Compile Include="Models\BlobVertex.cs" />
-    <Compile Include="Models\CommitVertex.cs" />
+    <Compile Include="Models\Vertices\BlobVertex.cs" />
+    <Compile Include="Models\Vertices\CommitVertex.cs" />
     <Compile Include="Models\GraphContents.cs" />
     <Compile Include="Models\GraphParameters.cs" />
-    <Compile Include="Models\ReferenceVertex.cs" />
+    <Compile Include="Models\Vertices\ReferenceVertex.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />
     <Compile Include="Models\GitEdge.cs" />
-    <Compile Include="Models\ObjectVertex.cs" />
-    <Compile Include="Models\GitVertex.cs" />
+    <Compile Include="Models\Vertices\ObjectVertex.cs" />
+    <Compile Include="Models\Vertices\GitVertex.cs" />
     <Compile Include="Models\IRepositoryGraphBuilder.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithm.cs" />
     <Compile Include="Models\ReachableHighlightAlgorithmFactory.cs" />
     <Compile Include="Models\RepositoryGraph.cs" />
-    <Compile Include="Models\TagAnnotationVertex.cs" />
-    <Compile Include="Models\TreeVertex.cs" />
+    <Compile Include="Models\Vertices\TagAnnotationVertex.cs" />
+    <Compile Include="Models\Vertices\TreeVertex.cs" />
     <Compile Include="VertexTemplateSelector.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -178,6 +178,7 @@
   <ItemGroup>
     <Resource Include="Images\directory.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -2,8 +2,9 @@
 {
     using System.Windows.Threading;
     using Models;
+    using Models.Vertices;
 
-    public class DesignTimeMainWindowViewModel : MainWindowViewModel
+	public class DesignTimeMainWindowViewModel : MainWindowViewModel
     {
         public DesignTimeMainWindowViewModel() : base(Dispatcher.CurrentDispatcher, _ => new DesignTimeGraphBuilder())
         {

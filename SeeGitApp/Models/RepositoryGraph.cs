@@ -3,8 +3,9 @@
     using System.Linq;
     using BclExtensionMethods;
     using QuickGraph;
+    using Vertices;
 
-    public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>
+	public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>
     {
         public RepositoryGraph()
         {

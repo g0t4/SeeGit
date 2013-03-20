@@ -1,4 +1,4 @@
-﻿namespace SeeGit.Models
+﻿namespace SeeGit.Models.Vertices
 {
     public class ReferenceVertex : GitVertex
     {

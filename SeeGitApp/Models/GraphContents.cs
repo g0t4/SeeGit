@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using BclExtensionMethods;
+    using Vertices;
 
-    public class GraphContents
+	public class GraphContents
     {
         public IDictionary<string, GitVertex> Vertices = new Dictionary<string, GitVertex>();
         public IDictionary<string, Edge> Edges = new Dictionary<string, Edge>();

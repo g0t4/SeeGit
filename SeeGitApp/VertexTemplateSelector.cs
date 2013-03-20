@@ -3,8 +3,9 @@ namespace SeeGit
     using System.Windows;
     using System.Windows.Controls;
     using Models;
+    using Models.Vertices;
 
-    public class VertexTemplateSelector : DataTemplateSelector
+	public class VertexTemplateSelector : DataTemplateSelector
     {
         public VertexTemplateSelector()
         {

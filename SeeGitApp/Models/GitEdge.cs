@@ -4,8 +4,9 @@
     using System.Linq;
     using BclExtensionMethods;
     using QuickGraph;
+    using Vertices;
 
-    public class GitEdge : TaggedEdge<GitVertex, IList<string>>
+	public class GitEdge : TaggedEdge<GitVertex, IList<string>>
     {
         public GitEdge(GitVertex source, GitVertex target, string tag)
             : base(source, target, (tag == null ? new string[] {} : new[] {tag}).ToList())

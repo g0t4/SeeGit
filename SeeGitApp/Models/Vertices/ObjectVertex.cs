@@ -1,8 +1,8 @@
-﻿namespace SeeGit.Models
+﻿namespace SeeGit.Models.Vertices
 {
-    using LibGit2Sharp;
+	using LibGit2Sharp;
 
-    public class ObjectVertex : GitVertex
+	public class ObjectVertex : GitVertex
     {
         public string Sha { get; set; }
 
