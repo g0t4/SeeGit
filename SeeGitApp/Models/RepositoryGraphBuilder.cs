@@ -40,6 +40,7 @@
             AddTagAnnotations();
             AddReferences();
             AddUnreachableCommits();
+            // todo add notes?
             graph.Set(_contents);
             return graph;
         }
