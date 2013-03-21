@@ -64,7 +64,8 @@ namespace SeeGit
                     e =>
                     e.ChangeType == WatcherChangeTypes.Created &&
                     e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
-                .Throttle(TimeSpan.FromSeconds(1));
+                .Throttle(TimeSpan.FromMilliseconds(250));
+            // todo perhaps we want a small throttle window and reset the window each time we get a change notification, like a BufferUntilCalm
         }
 
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryChangesObservable(string path)
@@ -75,7 +76,8 @@ namespace SeeGit
                        EnableRaisingEvents = true,
                        NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.LastWrite
                    }.ObserveFileSystemChangeEvents()
-                .Throttle(TimeSpan.FromSeconds(1));
+                .Throttle(TimeSpan.FromMilliseconds(250));
+            // todo perhaps we want a small throttle window and reset the window each time we get a change notification, like a BufferUntilCalm
         }
     }
 }
