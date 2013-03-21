@@ -6,7 +6,7 @@
     using LibGit2Sharp;
     using Vertices;
 
-	public class RepositoryGraphBuilder : IRepositoryGraphBuilder
+    public class RepositoryGraphBuilder : IRepositoryGraphBuilder
     {
         public string GitRepositoryPath { get; private set; }
         private readonly Repository _repository;
@@ -39,9 +39,26 @@
                        .ForEach(AddCommit);
             AddTagAnnotations();
             AddReferences();
-            // todo unreachable commits
+            AddUnreachableCommits();
             graph.Set(_contents);
             return graph;
+        }
+
+        private void AddUnreachableCommits()
+        {
+            if (!_parameters.IncludeUnreachableCommits)
+            {
+                return;
+            }
+
+            GitExtensions.GetUnreachableCommitShas(GitRepositoryPath)
+                         .ForEach(AddCommit);
+        }
+
+        private void AddCommit(string commitSha)
+        {
+            var commit = _repository.Lookup(commitSha, GitObjectType.Commit) as Commit;
+            AddCommit(commit);
         }
 
         private void AddTagAnnotations()

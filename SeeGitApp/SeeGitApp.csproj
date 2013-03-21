@@ -105,6 +105,7 @@
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
+    <Compile Include="Models\GitExtensions.cs" />
     <Compile Include="Models\Vertices\BlobVertex.cs" />
     <Compile Include="Models\Vertices\CommitVertex.cs" />
     <Compile Include="Models\GraphContents.cs" />
