@@ -70,7 +70,8 @@
       <DataTemplate x:Key="TreeVertexTemplate" DataType="{x:Type vertices:TreeVertex}">
         <Grid Margin="5">
           <Image Source="../Images/directory.png" />
-          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ShortSha, Mode=OneWay}"
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Text="{Binding ShortSha, Mode=OneWay}"
                      Foreground="Black" />
         </Grid>
       </DataTemplate>
@@ -78,10 +79,36 @@
       <DataTemplate x:Key="BlobVertexTemplate" DataType="{x:Type vertices:BlobVertex}">
         <Grid Margin="5">
           <Image Source="../Images/file.png" />
-          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ShortSha, Mode=OneWay}"
+          <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                     Text="{Binding ShortSha, Mode=OneWay}"
                      Foreground="Black" />
         </Grid>
       </DataTemplate>
+
+      <DataTemplate x:Key="IndexVertexTemplate" DataType="{x:Type vertices:IndexVertex}">
+        <Border BorderBrush="Black"
+                Background="LightGreen"
+                BorderThickness="1"
+                Padding="0">
+          <StackPanel Orientation="Vertical" Margin="5">
+            <TextBlock Text="{Binding Key, Mode=OneWay}" Foreground="Black" />
+          </StackPanel>
+        </Border>
+      </DataTemplate>
+
+      <DataTemplate x:Key="IndexEntryVertexTemplate" DataType="{x:Type vertices:IndexEntryVertex}">
+        <Border BorderBrush="Black"
+                Background="LightGreen"
+                BorderThickness="1"
+                Padding="0">
+          <StackPanel Orientation="Vertical" Margin="5">
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding Path, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding State, Mode=OneWay}" Foreground="Black" />
+          </StackPanel>
+        </Border>
+      </DataTemplate>
+
     </local:VertexTemplateSelector.Resources>
   </local:VertexTemplateSelector>
 

@@ -54,6 +54,10 @@
                   Command="Refresh" IsChecked="{Binding GraphParameters.IncludeUnreachableCommits}">
           Unreachable Commits
         </CheckBox>
+        <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeIndex}">
+          Index
+        </CheckBox>        
       </StackPanel>
     </StackPanel>
 

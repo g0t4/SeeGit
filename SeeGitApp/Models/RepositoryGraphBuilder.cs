@@ -41,8 +41,28 @@
             AddReferences();
             AddUnreachableCommits();
             // todo add notes?
+            AddIndex();
             graph.Set(_contents);
             return graph;
+        }
+
+        private void AddIndex()
+        {
+            if (!_parameters.IncludeIndex)
+            {
+                return;
+            }
+
+            var index = new IndexVertex();
+            _contents.AddVertex(index);
+            _repository.Index.ForEach(e => AddIndexEntry(e, index));
+        }
+
+        private void AddIndexEntry(IndexEntry entry, IndexVertex index)
+        {
+            var entryVertex = new IndexEntryVertex(entry);
+            _contents.AddVertex(entryVertex);
+            _contents.AddEdge(new GraphContents.Edge {Source = index.Key, Target = entryVertex.Key});
         }
 
         private void AddUnreachableCommits()
