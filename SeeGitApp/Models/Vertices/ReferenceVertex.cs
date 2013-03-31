@@ -23,6 +23,10 @@
             {
                 return canonicalName.Replace("remotes/", string.Empty);
             }
+            if (canonicalName.StartsWith("refs/remotes/"))
+            {
+                return canonicalName.Replace("refs/remotes/", string.Empty);
+            }
             return canonicalName;
         }
 
