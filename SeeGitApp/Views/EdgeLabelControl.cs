@@ -17,7 +17,7 @@
         {
             while (parent != null)
                 if (parent is EdgeControl)
-                    return (EdgeControl) parent;
+                    return (EdgeControl)parent;
                 else
                     parent = VisualTreeHelper.GetParent(parent);
             return null;
@@ -35,7 +35,7 @@
 
         private static double GetLabelDistance(double edgeLength)
         {
-            return edgeLength/2; // set the label halfway the length of the edge
+            return edgeLength / 2; // set the label halfway the length of the edge
         }
 
         private void EdgeLabelControl_LayoutUpdated(object sender, EventArgs e)
@@ -92,14 +92,14 @@
             var p = p1;
             var desiredSize = DesiredSize;
             if (this.Content?.ToString() == "/")
-            {   
+            {
                 // hard to see solo / (below every commit) so offset it slightly from the line
                 // enable Commit Content to see this
-                p.Offset(-desiredSize.Width/2-7, -desiredSize.Height/2);
+                p.Offset(-desiredSize.Width / 2 - 7, -desiredSize.Height / 2);
             }
             else
             {
-                p.Offset(-desiredSize.Width/2, -desiredSize.Height/2);
+                p.Offset(-desiredSize.Width / 2, -desiredSize.Height / 2);
             }
 
             // TODO hover file => `git show a3cb` its content if its plaintext?
@@ -107,7 +107,7 @@
 
             // move it "edgLength" on the segment
             var angleBetweenPoints = GetAngleBetweenPoints(p1, p2);
-            p.Offset(edgeLength*Math.Cos(angleBetweenPoints), -edgeLength*Math.Sin(angleBetweenPoints));
+            p.Offset(edgeLength * Math.Cos(angleBetweenPoints), -edgeLength * Math.Sin(angleBetweenPoints));
             Arrange(new Rect(p, desiredSize));
         }
     }
