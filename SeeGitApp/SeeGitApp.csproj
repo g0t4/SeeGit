@@ -48,6 +48,8 @@
     </ItemGroup>
     <!--FYI this shouldn't be needed with newer version of the nuget package for LibGit2Sharp, just b/c I am using legacy packge with Tools/install.ps1 that is deprecated and AFAICT not used during package install anymore and it is what makes the native binaries avail in output dir -->
     <Copy SourceFiles="@(LibGit2SharpNativeBinaries)" DestinationFolder="$(OutputPath)" />
+    <!-- TODO what if newer? -->
+    <!-- TODO not cleaned up during Clean, actually I don't think I should be making a sep collection to do this but meh for now -->
   </Target>
   <ItemGroup>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
