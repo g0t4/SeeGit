@@ -177,6 +177,7 @@
     <PackageReference Include="DotNetExtensions-Base">
       <Version>1.1.4713.27166</Version>
     </PackageReference>
+    <PackageReference Include="LibGit2Sharp" Version="0.10.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.135</Version>
     </PackageReference>
