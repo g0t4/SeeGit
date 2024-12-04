@@ -41,6 +41,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <Target Name="CopyLibGit2SharpNativeBinaries" AfterTargets="Build">
+    <!--<Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="High" />-->
+    <ItemGroup>
+      <LibGit2SharpNativeBinaries Include="$(NuGetPackageRoot)\libgit2sharp\0.10.0\NativeBinaries\amd64\git2.*" />
+    </ItemGroup>
+    <!--FYI this shouldn't be needed with newer version of the nuget package for LibGit2Sharp, just b/c I am using legacy packge with Tools/install.ps1 that is deprecated and AFAICT not used during package install anymore and it is what makes the native binaries avail in output dir -->
+    <Copy SourceFiles="@(LibGit2SharpNativeBinaries)" DestinationFolder="$(OutputPath)" />
+  </Target>
   <ItemGroup>
     <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
