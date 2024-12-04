@@ -91,7 +91,19 @@
             // align the point so that it  passes through the center of the label content
             var p = p1;
             var desiredSize = DesiredSize;
-            p.Offset(-desiredSize.Width/2, -desiredSize.Height/2);
+            if (this.Content?.ToString() == "/")
+            {   
+                // hard to see solo / (below every commit) so offset it slightly from the line
+                // enable Commit Content to see this
+                p.Offset(-desiredSize.Width/2-7, -desiredSize.Height/2);
+            }
+            else
+            {
+                p.Offset(-desiredSize.Width/2, -desiredSize.Height/2);
+            }
+
+            // TODO hover file => `git show a3cb` its content if its plaintext?
+
 
             // move it "edgLength" on the segment
             var angleBetweenPoints = GetAngleBetweenPoints(p1, p2);

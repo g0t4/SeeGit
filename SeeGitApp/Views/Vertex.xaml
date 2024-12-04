@@ -55,9 +55,9 @@
       <DataTemplate x:Key="ReferenceVertexTemplate" DataType="{x:Type vertices:ReferenceVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
-                BorderThickness="1"
+                BorderThickness="0.75"
                 Padding="0">
-          <StackPanel Orientation="Horizontal" Margin="5">
+          <StackPanel Orientation="Horizontal" Margin="5 1 5 3">
             <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="Black" />
           </StackPanel>
         </Border>
