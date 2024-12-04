@@ -8,17 +8,13 @@
       <DataTemplate x:Key="CommitVertexTemplate" DataType="{x:Type vertices:CommitVertex}">
         <Border BorderBrush="White"
                 Background="Black"
-                BorderThickness="2"
-                CornerRadius="10,10,10,10"
+                BorderThickness="1"
+                CornerRadius="5,5,5,5"
                 Padding="5">
-          <StackPanel Orientation="Vertical" Margin="5">
-            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="White" />
-            <TextBlock Text="{Binding MessageShort, Mode=OneWay}" Foreground="White" />
+          <StackPanel Orientation="Vertical" Margin="2 1 2 1">
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" HorizontalAlignment="Center" Foreground="White" />
+            <TextBlock Text="{Binding MessageShort, Mode=OneWay}" HorizontalAlignment="Center" Foreground="White" />
           </StackPanel>
-          <Border.Effect>
-            <DropShadowEffect BlurRadius="2" Color="LightGray"
-                              Opacity="0.3" Direction="315" />
-          </Border.Effect>
         </Border>
       </DataTemplate>
 
@@ -51,7 +47,7 @@
                 BorderThickness="1"
                 Padding="0">
           <StackPanel Orientation="Horizontal" Margin="5">
-            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
           </StackPanel>
         </Border>
       </DataTemplate>
