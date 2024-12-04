@@ -14,6 +14,9 @@
         {
             InitializeComponent();
             DataContext = _viewModel = new MainWindowViewModel(Dispatcher, path => new RepositoryGraphBuilder(path));
+
+            // FYI load a dir when testing, comment out when done (so dont have to browse to one each time):
+            _viewModel.MonitorRepository("C:\\Users\\wes\\repos\\github\\g0t4\\SeeGit");
         }
 
         private void OnChooseRepository(object sender, RoutedEventArgs args)
