@@ -20,7 +20,7 @@
             {
                 _repository = new Repository(GitRepositoryPath);
             }
-            catch (LibGit2Exception)
+            catch (LibGit2SharpException)
             {
             }
         }
@@ -60,7 +60,8 @@
 
         private void AddIndexEntry(IndexEntry entry, IndexVertex index)
         {
-            var entryVertex = new IndexEntryVertex(entry);
+            var status = _repository.Index.RetrieveStatus(entry.Path);
+            var entryVertex = new IndexEntryVertex(entry, status);
             _contents.AddVertex(entryVertex);
             _contents.AddEdge(new GraphContents.Edge {Source = index.Key, Target = entryVertex.Key});
         }

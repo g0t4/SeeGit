@@ -4,9 +4,9 @@
 
     public class IndexEntryVertex : ObjectVertex
     {
-        public IndexEntryVertex(IndexEntry entry) : base(entry.Id.Sha)
+        public IndexEntryVertex(IndexEntry entry, FileStatus status) : base(entry.Id.Sha)
         {
-            State = entry.State;
+            State = status;
             Path = entry.Path;
         }
 
