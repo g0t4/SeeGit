@@ -45,7 +45,7 @@ namespace SeeGit.Models
 
         public override bool OnEdgeHighlighting(TEdge edge)
         {
-            this.ClearAllHighlights();
+            ClearAllHighlights();
             if (!(!object.Equals(edge, default(TEdge)) && base.Controller.Graph.ContainsEdge(edge)))
             {
                 return false;
@@ -71,10 +71,10 @@ namespace SeeGit.Models
                 return false;
 
             Controller.HighlightVertex(vertex, "Source");
-            return HighlightChildren(vertex);
+            return HighlightChildrenRecursively(vertex);
         }
 
-        private bool HighlightChildren(TVertex vertex)
+        private bool HighlightChildrenRecursively(TVertex vertex)
         {
             if (vertex == null) return false;
 
@@ -83,7 +83,7 @@ namespace SeeGit.Models
                 Controller.SemiHighlightEdge(outEdge, "OutEdge");
                 if (Controller.IsHighlightedVertex(outEdge.Target)) continue;
                 Controller.SemiHighlightVertex(outEdge.Target, "Target");
-                HighlightChildren(outEdge.Target);
+                HighlightChildrenRecursively(outEdge.Target);
             }
             return true;
         }
