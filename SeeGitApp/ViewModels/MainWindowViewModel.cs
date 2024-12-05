@@ -79,7 +79,7 @@
             RepositoryPath = repositoryWorkingPath;
 
             _graphBuilder = _graphBuilderThunk(gitPath);
-            RepositoryPath = Directory.GetParent(gitPath).FullName;
+            RepositoryPath = Directory.GetParent(gitPath).Name;
             LayoutAlgorithmType = "Tree";
 
             Refresh();
