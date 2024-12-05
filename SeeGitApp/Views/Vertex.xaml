@@ -81,7 +81,7 @@
         </Grid>
       </DataTemplate>
 
-      <DataTemplate x:Key="IndexVertexTemplate" DataType="{x:Type vertices:IndexVertex}">
+      <DataTemplate x:Key="IndexVertexTemplate" DataType="{x:Type vertices:StagedVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
                 BorderThickness="1"

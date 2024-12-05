@@ -95,7 +95,7 @@
     <Compile Include="Models\GraphContents.cs" />
     <Compile Include="Models\GraphParameters.cs" />
     <Compile Include="Models\Vertices\IndexEntryVertex.cs" />
-    <Compile Include="Models\Vertices\IndexVertex.cs" />
+    <Compile Include="Models\Vertices\StagedVertex.cs" />
     <Compile Include="Models\Vertices\ReferenceVertex.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
     <Compile Include="Models\RepositoryGraphBuilder.cs" />

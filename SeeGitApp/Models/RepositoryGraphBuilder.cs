@@ -41,24 +41,35 @@
             AddReferences();
             AddUnreachableCommits();
             // todo add notes?
-            AddIndex();
+            AddStagedPreCommitCommit();
+            AddWorkingTrees();
             graph.Set(_contents);
             return graph;
         }
 
-        private void AddIndex()
+        private void AddWorkingTrees()
+        {
+            if(!_parameters.IncludeWorkTrees)
+            {
+                return;
+            }
+
+        }
+
+        private void AddStagedPreCommitCommit()
         {
             if (!_parameters.IncludeStaged)
             {
                 return;
             }
 
-            var index = new IndexVertex();
-            _contents.AddVertex(index);
-            _repository.Index.ForEach(e => AddIndexEntry(e, index));
+            var staged = new StagedVertex();
+            _contents.AddVertex(staged);
+            _repository.Index.ForEach(e => AddIndexEntry(e, staged));
         }
 
-        private void AddIndexEntry(IndexEntry entry, IndexVertex index)
+
+        private void AddIndexEntry(IndexEntry entry, StagedVertex index)
         {
             var status = _repository.RetrieveStatus(entry.Path);
             var entryVertex = new IndexEntryVertex(entry, status);

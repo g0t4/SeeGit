@@ -59,7 +59,7 @@
           Index
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
-                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeWorkTree}">
+                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeWorkTrees}">
                     Working Tree
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"

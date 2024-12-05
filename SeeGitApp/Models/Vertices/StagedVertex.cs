@@ -1,10 +1,10 @@
 ﻿namespace SeeGit.Models.Vertices
 {
-    public class IndexVertex : GitVertex
+    public class StagedVertex : GitVertex
     {
         public override string Key
         {
-            get { return "Index"; }
+            get { return "Staged"; }
         }
     }
 }
