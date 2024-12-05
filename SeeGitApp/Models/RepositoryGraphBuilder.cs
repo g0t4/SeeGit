@@ -141,19 +141,19 @@
         {
             var vertex = new TagAnnotationVertex(tag.Annotation);
             _contents.AddVertex(vertex);
-            var edge = new GraphContents.Edge {Source = tag.Annotation.Sha, Target = tag.Annotation.Target.Sha};
+            var edge = new GraphContents.Edge { Source = tag.Annotation.Sha, Target = tag.Annotation.Target.Sha };
             _contents.AddEdge(edge);
         }
 
         private void AddReferences()
         {
-            var references = _repository.Refs.Union(new[] {_repository.Refs["HEAD"]})
+            var references = _repository.Refs.Union(new[] { _repository.Refs["HEAD"] })
                                         .Select(b => new ReferenceVertex(b.CanonicalName, b.TargetIdentifier))
                                         .ToArray();
 
             references.ForEach(b => _contents.AddVertex(b));
             references
-                .Select(r => new GraphContents.Edge {Source = r.Key, Target = r.TargetId})
+                .Select(r => new GraphContents.Edge { Source = r.Key, Target = r.TargetId })
                 .ForEach(e => _contents.AddEdge(e));
         }
 
@@ -163,12 +163,12 @@
             _contents.AddVertex(commitVertex);
             commit.Parents.ForEach(AddCommit);
             commit.Parents
-                  .Select(p => new GraphContents.Edge {Source = commit.Sha, Target = p.Sha})
+                  .Select(p => new GraphContents.Edge { Source = commit.Sha, Target = p.Sha })
                   .ForEach(edge => _contents.AddEdge(edge));
             if (_parameters.IncludeCommitContent)
             {
                 AddTree(commit.Tree);
-                var edge = new GraphContents.Edge {Source = commit.Sha, Target = commit.Tree.Sha, Tag = "/"};
+                var edge = new GraphContents.Edge { Source = commit.Sha, Target = commit.Tree.Sha, Tag = "/" };
                 _contents.AddEdge(edge);
             }
         }
@@ -194,7 +194,7 @@
             {
                 throw new NotSupportedException("Invalid tree entry, not supported: " + entry.Target.GetType());
             }
-            var edge = new GraphContents.Edge {Source = tree.Sha, Target = entry.Target.Sha, Tag = entry.Name};
+            var edge = new GraphContents.Edge { Source = tree.Sha, Target = entry.Target.Sha, Tag = entry.Name };
             _contents.AddEdge(edge);
         }
 
