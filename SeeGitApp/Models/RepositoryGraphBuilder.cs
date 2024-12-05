@@ -98,6 +98,7 @@
 
             var staged = new StagedVertex();
             _contents.AddVertex(staged);
+            // TODO do I need to query for files to also get deleted/renamed? me thinks so?
             _repository.Index.ForEach(e => AddStagedEntry(e, staged));
 
             // resolve ref chain (i.e. HEAD => master => commit, or detached HEAD => commit, etc. ):
@@ -108,10 +109,13 @@
 
         private void AddStagedEntry(IndexEntry entry, StagedVertex staged)
         {
+            // goal is to show new files in stage (100% new, modified, or deleted)
+            // TODO deleting a file is not represented when showing commit content.. .hrm in this case maybe give the green box a new id here to make it win?
             var status = _repository.RetrieveStatus(entry.Path);
             var entryVertex = new StagedEntryVertex(entry, status);
-            _contents.AddVertex(entryVertex);
-            _contents.AddEdge(new GraphContents.Edge { Source = staged.Key, Target = entryVertex.Key });
+            _contents.AddVertex(entryVertex); // BTW if the staged file (new/modified) matches content in another existing object already in git obj db then it will win out and wont show green box in that case
+            var tag = _parameters.IncludeCommitContent ? entry.Path : "";
+            _contents.AddEdge(new GraphContents.Edge { Source = staged.Key, Target = entryVertex.Key, Tag = tag });
         }
 
         private void AddUnreachableCommits()

@@ -4,7 +4,8 @@
 
     public class StagedEntryVertex : ObjectVertex
     {
-        public StagedEntryVertex(IndexEntry entry, FileStatus status) : base(entry.Id.Sha)
+        public StagedEntryVertex(IndexEntry entry, FileStatus status) : base(
+                status == FileStatus.DeletedFromIndex ? "deleted" + entry.Id.Sha : entry.Id.Sha)
         {
             State = status;
             Path = entry.Path;
