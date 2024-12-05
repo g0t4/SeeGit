@@ -4,7 +4,7 @@ using QuikGraph;
 
 namespace SeeGit.Models
 {
- /*   public class ReachableHighlightAlgorithmFactory<TVertex, TEdge, TGraph> :
+    public class ReachableHighlightAlgorithmFactory<TVertex, TEdge, TGraph> :
         IHighlightAlgorithmFactory<TVertex, TEdge, TGraph> where TVertex : class
                                                            where TEdge : IEdge<TVertex>
                                                            where TGraph : class, IBidirectionalGraph<TVertex, TEdge>
@@ -49,5 +49,5 @@ namespace SeeGit.Models
         {
             get { yield return HighlightModeName; }
         }
-    }*/
+    }
 }
