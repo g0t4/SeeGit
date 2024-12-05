@@ -48,7 +48,7 @@
 
         private void AddIndex()
         {
-            if (!_parameters.IncludeIndex)
+            if (!_parameters.IncludeStaged)
             {
                 return;
             }
