@@ -18,6 +18,8 @@ namespace SeeGit.Models
         {
             // FYI reachable highlights are not quite working yet though not that big of a deal IMO.. just the blue line when hovering over the graph, so lets focus on why layout isn't working quite right first
             //   TODO blue reachables are pointed at wrong shapes and not always updating as they would in v1.0.1/v1.1
+            //   ALSO, not removing blue highlight when hover off of vertex... unlike original v1.0.1 which snapped off right away
+            //   IMPROVEMENT? take off black highlight of arrow if hover over arrow (edge)
 
             // OMG do I need to lock before clearing and removing items?
             ClearSemiHighlights();
