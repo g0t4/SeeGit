@@ -7,10 +7,6 @@ This is a little experiment in creating a realtime git repository visualizer.
 __WARNING: This is some haacky code. I plan to rewrite it later. It's a proof of
  concept__
 
-## TODO notes new features 2025
-
-- TODO Show working tree like I show index (check box and yeah, see untracked files/changes)! - neat to see file through entire lifecycle of commands (including pre add)
-
 ## Update notes
 
 I'd like to port this to net8+, here are some observations:

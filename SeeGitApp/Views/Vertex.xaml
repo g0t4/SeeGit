@@ -81,24 +81,49 @@
         </Grid>
       </DataTemplate>
 
-      <DataTemplate x:Key="IndexVertexTemplate" DataType="{x:Type vertices:StagedVertex}">
+      <DataTemplate x:Key="StagedVertexTemplate" DataType="{x:Type vertices:StagedVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
                 BorderThickness="1"
                 Padding="0">
-          <StackPanel Orientation="Vertical" Margin="5">
+          <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding Key, Mode=OneWay}" Foreground="Black" />
           </StackPanel>
         </Border>
       </DataTemplate>
 
-      <DataTemplate x:Key="IndexEntryVertexTemplate" DataType="{x:Type vertices:IndexEntryVertex}">
+      <DataTemplate x:Key="StagedEntryVertexTemplate" DataType="{x:Type vertices:StagedEntryVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
                 BorderThickness="1"
                 Padding="0">
-          <StackPanel Orientation="Vertical" Margin="5">
+          <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding Path, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding State, Mode=OneWay}" Foreground="Black" />
+          </StackPanel>
+        </Border>
+      </DataTemplate>
+
+      <DataTemplate x:Key="WorkTreeVertexTemplate" DataType="{x:Type vertices:WorkTreeVertex}">
+        <Border BorderBrush="Black"
+                Background="LightGray"
+                BorderThickness="1"
+                Padding="0">
+          <StackPanel Orientation="Vertical" Margin="4 1 4 2">
+            <TextBlock Text="{Binding Key, Mode=OneWay}" Foreground="Black" />
+          </StackPanel>
+        </Border>
+      </DataTemplate>
+
+      <DataTemplate x:Key="WorkTreeEntryVertexTemplate" DataType="{x:Type vertices:WorkTreeEntryVertex}">
+        <Border BorderBrush="Black"
+                Background="LightGray"
+                BorderThickness="1"
+                Padding="0">
+          <StackPanel Orientation="Vertical" Margin="4 1 4 2">
+            <!-- TODO add back object id SHA if applicable to work treee entries too -->
+            <!--<TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />-->
             <TextBlock Text="{Binding Path, Mode=OneWay}" Foreground="Black" />
             <TextBlock Text="{Binding State, Mode=OneWay}" Foreground="Black" />
           </StackPanel>

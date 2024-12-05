@@ -94,7 +94,7 @@
     <Compile Include="Models\Vertices\CommitVertex.cs" />
     <Compile Include="Models\GraphContents.cs" />
     <Compile Include="Models\GraphParameters.cs" />
-    <Compile Include="Models\Vertices\IndexEntryVertex.cs" />
+    <Compile Include="Models\Vertices\StagedEntryVertex.cs" />
     <Compile Include="Models\Vertices\StagedVertex.cs" />
     <Compile Include="Models\Vertices\ReferenceVertex.cs" />
     <Compile Include="Models\RepositoryGraphLayout.cs" />
@@ -108,6 +108,9 @@
     <Compile Include="Models\RepositoryGraph.cs" />
     <Compile Include="Models\Vertices\TagAnnotationVertex.cs" />
     <Compile Include="Models\Vertices\TreeVertex.cs" />
+    <Compile Include="Models\Vertices\WorkTreeEntryVertex.cs" />
+    <Compile Include="Models\Vertices\WorkTreeVertex.cs" />
+    <Compile Include="Models\WorkTreeVertex.cs" />
     <Compile Include="VertexTemplateSelector.cs" />
     <Compile Include="ViewModels\DesignTimeMainWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

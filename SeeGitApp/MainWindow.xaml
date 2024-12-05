@@ -56,15 +56,15 @@
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
                   Command="Refresh" IsChecked="{Binding GraphParameters.IncludeStaged}">
-          Index
+          Staged
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
                   Command="Refresh" IsChecked="{Binding GraphParameters.IncludeWorkTrees}">
-                    Working Tree
+          WorkTree
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
                   Command="Refresh" IsEnabled="False" IsChecked="{Binding GraphParameters.IncludeStashes}">
-                    Stashes
+          Stashes
         </CheckBox>
       </StackPanel>
     </StackPanel>

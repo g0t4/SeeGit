@@ -42,18 +42,36 @@
             AddUnreachableCommits();
             // todo add notes?
             AddStagedPreCommitCommit();
-            AddWorkingTrees();
+            AddWorkingTree();
             graph.Set(_contents);
             return graph;
         }
 
-        private void AddWorkingTrees()
+        private void AddWorkingTree()
         {
-            if(!_parameters.IncludeWorkTrees)
+            if (!_parameters.IncludeWorkTrees)
             {
                 return;
             }
+            // PRN _repository.Worktrees (is empty but should have a list like `git worktree list`)
+            //  for now just assume one worktree at repo path
 
+            var files = _repository.RetrieveStatus(new StatusOptions { IncludeUntracked = true, DetectRenamesInWorkDir = true });
+            // TODO other StatusOptions?
+
+            var workTreeVertex = new WorkTreeVertex();
+            _contents.AddVertex(workTreeVertex);
+            foreach (var file in files)
+            {
+                // TODO ok so is there a way to get the object Id before checked in? if not get rid of object id and use speical type for work tree entries
+                var vertex = new WorkTreeEntryVertex(file.FilePath, file.State);
+                _contents.AddVertex(vertex);
+                _contents.AddEdge(new GraphContents.Edge { Source = workTreeVertex.Key, Target = vertex.Key });
+            }
+            // show files that are not committed, IIAC they still are like committed objects?
+            //AddCommit(tree.Head.Tip);
+            //var edge = new GraphContents.Edge { Source = tree.Head.Tip.Sha, Target = tree.Sha, Tag = "worktree" };
+            //_contents.AddEdge(edge);
         }
 
         private void AddStagedPreCommitCommit()
@@ -65,16 +83,16 @@
 
             var staged = new StagedVertex();
             _contents.AddVertex(staged);
-            _repository.Index.ForEach(e => AddIndexEntry(e, staged));
+            _repository.Index.ForEach(e => AddStagedEntry(e, staged));
         }
 
 
-        private void AddIndexEntry(IndexEntry entry, StagedVertex index)
+        private void AddStagedEntry(IndexEntry entry, StagedVertex staged)
         {
             var status = _repository.RetrieveStatus(entry.Path);
-            var entryVertex = new IndexEntryVertex(entry, status);
+            var entryVertex = new StagedEntryVertex(entry, status);
             _contents.AddVertex(entryVertex);
-            _contents.AddEdge(new GraphContents.Edge {Source = index.Key, Target = entryVertex.Key});
+            _contents.AddEdge(new GraphContents.Edge { Source = staged.Key, Target = entryVertex.Key });
         }
 
         private void AddUnreachableCommits()
