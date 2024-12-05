@@ -60,7 +60,7 @@
 
         private void AddIndexEntry(IndexEntry entry, IndexVertex index)
         {
-            var status = _repository.Index.RetrieveStatus(entry.Path);
+            var status = _repository.Index.RetrieveStatus(entry.Path, new StatusOptions { IncludeUntracked = true });
             var entryVertex = new IndexEntryVertex(entry, status);
             _contents.AddVertex(entryVertex);
             _contents.AddEdge(new GraphContents.Edge {Source = index.Key, Target = entryVertex.Key});
