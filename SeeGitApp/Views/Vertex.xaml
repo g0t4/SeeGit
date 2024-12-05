@@ -21,7 +21,7 @@
       <DataTemplate x:Key="TagVertexTemplate" DataType="{x:Type vertices:ReferenceVertex}">
         <Border BorderBrush="Black"
                 Background="Yellow"
-                BorderThickness="1"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="Black" />
@@ -32,7 +32,7 @@
       <DataTemplate x:Key="TagAnnotationVertexTemplate" DataType="{x:Type vertices:ReferenceVertex}">
         <Border BorderBrush="Black"
                 Background="DarkGoldenrod"
-                BorderThickness="1"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="5">
             <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
@@ -43,11 +43,11 @@
 
       <DataTemplate x:Key="HeadVertexTemplate" DataType="{x:Type vertices:ReferenceVertex}">
         <Border BorderBrush="Black"
-                Background="DarkViolet"
-                BorderThickness="0.75"
+                Background="HotPink"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Horizontal" Margin="4 1 4 2">
-            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="White" />
+            <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="Black" />
           </StackPanel>
         </Border>
       </DataTemplate>
@@ -55,7 +55,7 @@
       <DataTemplate x:Key="ReferenceVertexTemplate" DataType="{x:Type vertices:ReferenceVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
-                BorderThickness="0.75"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Horizontal" Margin="4 1 4 2">
             <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="Black" />
@@ -96,7 +96,7 @@
       <DataTemplate x:Key="StagedEntryVertexTemplate" DataType="{x:Type vertices:StagedEntryVertex}">
         <Border BorderBrush="Black"
                 Background="LightGreen"
-                BorderThickness="1"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
@@ -109,7 +109,7 @@
       <DataTemplate x:Key="WorkTreeVertexTemplate" DataType="{x:Type vertices:WorkTreeVertex}">
         <Border BorderBrush="Black"
                 Background="LightGray"
-                BorderThickness="1"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding Key, Mode=OneWay}" Foreground="Black" />
@@ -120,7 +120,7 @@
       <DataTemplate x:Key="WorkTreeEntryVertexTemplate" DataType="{x:Type vertices:WorkTreeEntryVertex}">
         <Border BorderBrush="Black"
                 Background="{Binding StatusColor, Mode=OneWay}"
-                BorderThickness="1"
+                BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
