@@ -118,7 +118,7 @@
 
       <DataTemplate x:Key="WorkTreeEntryVertexTemplate" DataType="{x:Type vertices:WorkTreeEntryVertex}">
         <Border BorderBrush="Black"
-                Background="LightGray"
+                Background="{Binding StatusColor, Mode=OneWay}"
                 BorderThickness="1"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
