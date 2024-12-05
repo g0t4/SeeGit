@@ -16,6 +16,7 @@ namespace SeeGit.Models
 
         private void ClearAllHighlights()
         {
+            // OMG do I need to lock before clearing and removing items?
             ClearSemiHighlights();
             // TODO what are all the warnings here about modified collections and cannot finish enumeration, add those back (user unhandled), right now I ignored them just to test app out
             foreach (TVertex local in Controller.HighlightedVertices)
@@ -32,7 +33,8 @@ namespace SeeGit.Models
         {
             // TODO what are all the warnings here about modified collections and cannot finish enumeration, add those back (user unhandled), right now I ignored them just to test app out
             //   FYI definitely happened often on SemiHighlightedVertices:
-            foreach (var vertex in Controller.SemiHighlightedVertices)
+            // IIRC it was InvalidOperationException
+            foreach (var vertex in Controller.SemiHighlightedVertices) // HOW DO I add back the user unhandled exception breaking here (not breakpoint)
             {
                 Controller.RemoveSemiHighlightFromVertex(vertex);
             }
