@@ -9,6 +9,8 @@
     {
         private RepositoryGraph _graph;
         private string _repositoryPath;
+        private string _repoDisplayName;
+
         private GraphParameters _graphParameters = new GraphParameters();
 
         private IRepositoryGraphBuilder _graphBuilder;
@@ -55,6 +57,16 @@
             }
         }
 
+        public string RepoDisplayName
+        {
+            get { return _repoDisplayName; }
+            private set
+            {
+                _repoDisplayName = value;
+                RaisePropertyChanged(() => RepoDisplayName);
+            }
+        }
+
         public GraphParameters GraphParameters
         {
             get { return _graphParameters; }
@@ -76,10 +88,9 @@
                 return;
             }
 
-            RepositoryPath = repositoryWorkingPath;
-
             _graphBuilder = _graphBuilderThunk(gitPath);
-            RepositoryPath = Directory.GetParent(gitPath).Name;
+            RepositoryPath = Directory.GetParent(gitPath).FullName;
+            RepoDisplayName = Directory.GetParent(gitPath).Name;
             LayoutAlgorithmType = "Tree";
 
             Refresh();
