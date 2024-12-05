@@ -49,7 +49,7 @@
     <!--<Message Text="NuGetPackageRoot: $(NuGetPackageRoot)" Importance="High" />-->
     <ItemGroup>
       <!-- git2-*.dll/pdb -->
-      <LibGit2SharpNativeBinaries Include="$(NuGetPackageRoot)\libgit2sharp\0.13.0\NativeBinaries\amd64\git2*" />
+      <LibGit2SharpNativeBinaries Include="$(NuGetPackageRoot)\libgit2sharp\0.16.0\NativeBinaries\amd64\git2*" />
     </ItemGroup>
     <!--FYI this shouldn't be needed with newer version of the nuget package for LibGit2Sharp, just b/c I am using legacy packge with Tools/install.ps1 that is deprecated and AFAICT not used during package install anymore and it is what makes the native binaries avail in output dir -->
     <Copy SourceFiles="@(LibGit2SharpNativeBinaries)" DestinationFolder="$(OutputPath)" />
@@ -190,7 +190,7 @@
     <PackageReference Include="DotNetExtensions-Base">
       <Version>1.1.4713.27166</Version>
     </PackageReference>
-    <PackageReference Include="LibGit2Sharp" Version="0.13.0" />
+    <PackageReference Include="LibGit2Sharp" Version="0.16.0" />
     <PackageReference Include="Rx_Experimental-Main">
       <Version>1.1.11111</Version>
     </PackageReference>
