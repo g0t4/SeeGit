@@ -18,7 +18,8 @@
         {
             if (Vertices.Count() > 1)
             {
-                LayoutAlgorithmType = "EfficientSugiyama";
+                // TODO back to EfficientSugiyama
+                LayoutAlgorithmType = "Tree";
             }
         }
 
