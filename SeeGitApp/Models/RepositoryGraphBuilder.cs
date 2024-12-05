@@ -35,7 +35,7 @@
             }
             _contents = new GraphContents();
             _repository.Commits
-                       .QueryBy(new CommitFilter {SortBy = CommitSortStrategies.Topological | CommitSortStrategies.Time | CommitSortStrategies.Reverse, IncludeReachableFrom = _repository.Refs})
+                       .QueryBy(new CommitFilter { SortBy = CommitSortStrategies.Topological | CommitSortStrategies.Time | CommitSortStrategies.Reverse, IncludeReachableFrom = _repository.Refs })
                        .ForEach(AddCommit);
             AddTagAnnotations();
             AddReferences();
@@ -97,6 +97,11 @@
             var staged = new StagedVertex();
             _contents.AddVertex(staged);
             _repository.Index.ForEach(e => AddStagedEntry(e, staged));
+
+            // resolve ref chain (i.e. HEAD => master => commit, or detached HEAD => commit, etc. ):
+            var headCommitSha = _repository.Refs["HEAD"].ResolveToDirectReference().TargetIdentifier; // this is the commit sha
+            var toFutureParentCommit = new GraphContents.Edge { Source = staged.Key, Target = headCommitSha };
+            _contents.AddEdge(toFutureParentCommit);
         }
 
 
