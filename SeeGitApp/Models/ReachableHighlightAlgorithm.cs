@@ -1,5 +1,5 @@
 ﻿using GraphShape.Algorithms.Highlight;
-using QuickGraph;
+using QuikGraph;
 
 namespace SeeGit.Models
 {

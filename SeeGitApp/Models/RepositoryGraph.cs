@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using BclExtensionMethods;
-    using QuickGraph;
+    using QuikGraph;
     using Vertices;
 
 	public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>

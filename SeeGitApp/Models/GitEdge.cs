@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using BclExtensionMethods;
-    using QuickGraph;
+    using QuikGraph;
     using Vertices;
 
 	public class GitEdge : TaggedEdge<GitVertex, IList<string>>
