@@ -45,27 +45,27 @@
             var target = edgeControl.Target;
             var p2 = new Point(GraphCanvas.GetX(target), GraphCanvas.GetY(target));
 
-            double edgeLength;
+            double labelLength;
             var routePoints = edgeControl.RoutePoints;
             if (routePoints == null)
                 // the edge is a single segment (p1,p2)
-                edgeLength = GetDistanceBetweenPoints(p1, p2) * 0.5; // half way
+                labelLength = GetDistanceBetweenPoints(p1, p2) * 0.5; // half way
             else
             {
                 // the edge has one or more segments
                 // compute the total length of all the segments
-                edgeLength = 0;
+                double totalEdgesLength = 0;
                 for (var i = 0; i <= routePoints.Length; ++i)
                     // layout: p1 => ...routePoints => p2
                     if (i == 0)
-                        edgeLength += GetDistanceBetweenPoints(p1, routePoints[0]);
+                        totalEdgesLength += GetDistanceBetweenPoints(p1, routePoints[0]);
                     else if (i == routePoints.Length)
-                        edgeLength += GetDistanceBetweenPoints(routePoints[routePoints.Length - 1], p2);
+                        totalEdgesLength += GetDistanceBetweenPoints(routePoints[routePoints.Length - 1], p2);
                     else
-                        edgeLength += GetDistanceBetweenPoints(routePoints[i - 1], routePoints[i]);
+                        totalEdgesLength += GetDistanceBetweenPoints(routePoints[i - 1], routePoints[i]);
 
                 // find the line segment where the half distance is located
-                edgeLength = edgeLength * 0.5; // half way
+                labelLength = totalEdgesLength * 0.5; // half way
                 var newp1 = p1;
                 var newp2 = p2;
                 for (var i = 0; i <= routePoints.Length; ++i)
@@ -77,14 +77,17 @@
                         lengthOfSegment = GetDistanceBetweenPoints(newp1 = routePoints[routePoints.Length - 1], newp2 = p2);
                     else
                         lengthOfSegment = GetDistanceBetweenPoints(newp1 = routePoints[i - 1], newp2 = routePoints[i]);
-                    if (lengthOfSegment >= edgeLength)
+                    if (lengthOfSegment >= labelLength)
+                        // means label position is w/in this segment (newp1/newp2 are captured by this break)
                         break;
-                    edgeLength -= lengthOfSegment;
+                    // subtract out each segment length until we find the segment within which the half way point resides
+                    labelLength -= lengthOfSegment;
                 }
                 // redefine our edge points
                 p1 = newp1;
                 p2 = newp2;
             }
+
             // align the point so that it  passes through the center of the label content
             var desiredSize = DesiredSize;
             if (this.Content?.ToString() == "/")
@@ -100,10 +103,9 @@
 
             // TODO hover file => `git show a3cb` its content if its plaintext?
 
-
             // move it "edgLength" on the segment
             var angleBetweenPoints = GetAngleBetweenPoints(p1, p2);
-            p1.Offset(edgeLength * Math.Cos(angleBetweenPoints), -edgeLength * Math.Sin(angleBetweenPoints));
+            p1.Offset(labelLength * Math.Cos(angleBetweenPoints), -labelLength * Math.Sin(angleBetweenPoints));
             Arrange(new Rect(p1, desiredSize));
         }
     }
