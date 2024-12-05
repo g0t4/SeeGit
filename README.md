@@ -7,7 +7,22 @@ This is a little experiment in creating a realtime git repository visualizer.
 __WARNING: This is some haacky code. I plan to rewrite it later. It's a proof of
  concept__
 
-# Goal
+## Update notes
+
+I'd like to port this to net8+, here are some observations:
+
+- Rx extensions are using very basic Observable,Throttle,Where methods and that's about it, so shouldn't be a problem to move to actual reactive lib (instead of Rx_Experimental-Main which is delisted)
+- DotNetExtensions-Base should work fine with netstandard/shims (very basics of BCL net fwk)
+- LibGit2Sharp has arm and xplat builds and binaries so good to go there, all for like net8
+- GraphSharp has ports too?
+	- https://www.nuget.org/packages/GraphSharp.Core
+	- etc (check nuget)
+- QuickGraph has several ports (heavy usage):
+	- https://www.nuget.org/packages/Sandwych.QuickGraph.Core
+	- https://www.nuget.org/packages/QuikGraph
+- WPF xplat => MAUI?
+
+## Goal
 I just want something that I can use during presentations on Git. So as I run
 commands, it'll show the git graph in a beautiful manner.
 
