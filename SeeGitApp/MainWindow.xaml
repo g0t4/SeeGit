@@ -62,10 +62,10 @@
     </StackPanel>
 
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
-      <models:RepositoryGraphLayout x:Name="GraphLayout" Margin="10" Graph="{Binding Graph}"
+      <!--<models:RepositoryGraphLayout x:Name="GraphLayout" Margin="10" Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}"
                                     OverlapRemovalAlgorithmType="FSA"
-                                    FlowDirection="LeftToRight" />
+                                    FlowDirection="LeftToRight" />-->
     </zoom:ZoomControl>
   </Grid>
 </Window>
