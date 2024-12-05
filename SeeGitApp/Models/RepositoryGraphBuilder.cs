@@ -85,6 +85,8 @@
                     _contents.AddEdge(new GraphContents.Edge { Source = workTreeVertex.Key, Target = vertex.Key });
                 }
             }
+            // TODO mirror staged entry VM class that translates to shorter statuses (i.e. New not NewInWorkDir)...
+            //   also match colors (red = delete, blue = new/modified/rest...)
 
             // TODO, link WorkTree vertex with an edge to Staged to show chain of changes?
         }
