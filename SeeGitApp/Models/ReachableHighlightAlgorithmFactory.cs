@@ -27,7 +27,8 @@ namespace SeeGit.Models
 
         public IHighlightParameters CreateParameters(string highlightMode, IHighlightParameters oldParameters)
         {
-            return new HighlightParameterBase();
+            // TODO does this work?!
+            return new HighlightParameters();
         }
 
         public string GetHighlightMode(IHighlightAlgorithm<TVertex, TEdge> algorithm)
