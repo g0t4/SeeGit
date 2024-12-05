@@ -30,7 +30,7 @@
             }
         }
 
-        public string Color
+        public string TextColor
         {
             get
             {

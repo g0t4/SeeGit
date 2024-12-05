@@ -95,7 +95,7 @@
 
       <DataTemplate x:Key="StagedEntryVertexTemplate" DataType="{x:Type vertices:StagedEntryVertex}">
         <Border BorderBrush="Black"
-                Background="{Binding Color, Mode=OneTime}"
+                Background="{Binding TextColor, Mode=OneTime}"
                 BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
