@@ -12,11 +12,9 @@ namespace SeeGit.Models
         private const string HighlightModeName = "Reachable";
 
         public IHighlightAlgorithm<TVertex, TEdge> CreateAlgorithm(string highlightMode,
-                                                                           IHighlightContext<TVertex, TEdge, TGraph>
-                                                                               context,
-                                                                           IHighlightController<TVertex, TEdge, TGraph>
-                                                                               controller,
-                                                                           IHighlightParameters parameters)
+                                                                       IHighlightContext<TVertex, TEdge, TGraph> context,
+                                                                       IHighlightController<TVertex, TEdge, TGraph> controller,
+                                                                       IHighlightParameters parameters)
         {
             if (string.IsNullOrEmpty(highlightMode) || highlightMode == HighlightModeName)
             {
