@@ -35,7 +35,7 @@
             }
             _contents = new GraphContents();
             _repository.Commits
-                       .QueryBy(new Filter {SortBy = GitSortOptions.Topological | GitSortOptions.Time, Since = _repository.Refs})
+                       .QueryBy(new CommitFilter {SortBy = CommitSortStrategies.Topological | CommitSortStrategies.Time, Since = _repository.Refs})
                        .ForEach(AddCommit);
             AddTagAnnotations();
             AddReferences();
