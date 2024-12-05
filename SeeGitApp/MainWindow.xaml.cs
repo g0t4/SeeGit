@@ -16,8 +16,10 @@
             DataContext = _viewModel = new MainWindowViewModel(Dispatcher, path => new RepositoryGraphBuilder(path));
 
             // FYI load a dir when testing, comment out when done (so dont have to browse to one each time):
-            _viewModel.MonitorRepository("C:\\Users\\wes\\repos\\scratch\\test-small");
-            
+            //_viewModel.MonitorRepository("C:\\Users\\wes\\repos\\scratch\\test-small");
+            _viewModel.MonitorRepository("C:\\Users\\wes\\repos\\scratch\\test-new");
+            //_viewModel.MonitorRepository("C:\\Users\\wes\\repos\\scratch\\test-mini");
+
             //_viewModel.MonitorRepository("C:\\Users\\wes\\repos\\github\\g0t4\\pwsh-abbr"); // ~10 commits, real repo (too many files though for content, realistically)
             // TODO can I get to a point where I can better represent bigger repos (like this one with 10 commits, or is this really just for learning in small repos with a few commits/files, which is totally cool if so as that was what I made this for)
         }
