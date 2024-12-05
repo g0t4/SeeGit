@@ -1,4 +1,4 @@
-﻿using GraphSharp.Algorithms.Highlight;
+﻿using GraphShape.Algorithms.Highlight;
 using QuickGraph;
 
 namespace SeeGit.Models

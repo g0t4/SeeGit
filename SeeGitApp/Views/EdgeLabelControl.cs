@@ -4,7 +4,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using GraphSharp.Controls;
+    using GraphShape.Controls;
 
     public class EdgeLabelControl : ContentControl
     {

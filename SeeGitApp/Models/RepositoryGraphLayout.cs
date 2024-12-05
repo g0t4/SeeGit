@@ -1,6 +1,6 @@
 ﻿namespace SeeGit.Models
 {
-    using GraphSharp.Controls;
+    using GraphShape.Controls;
     using Vertices;
 
 	public class RepositoryGraphLayout : GraphLayout<GitVertex, GitEdge, RepositoryGraph>

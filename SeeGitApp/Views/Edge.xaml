@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Converters:EdgeRouteToPathConverter
-    xmlns:Converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls" x:Key="routeToPathConverter" />
+    xmlns:Converters="clr-namespace:GraphShape.Converters;assembly=GraphShape.Controls" x:Key="routeToPathConverter" />
   <Style xmlns:views="clr-namespace:SeeGit.Views"
-         xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
-         TargetType="{x:Type graphsharp:EdgeControl}">
+         xmlns:graphshape="clr-namespace:GraphShape.Controls;assembly=GraphShape.Controls"
+         TargetType="{x:Type graphshape:EdgeControl}">
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="{x:Type graphsharp:EdgeControl}">
+        <ControlTemplate TargetType="{x:Type graphshape:EdgeControl}">
           <Canvas>
             <Path Stroke="Black"
                   StrokeThickness="1"
@@ -19,17 +19,17 @@
                   <PathGeometry.Figures>
                     <MultiBinding Converter="{StaticResource routeToPathConverter}">
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                               Path="Source.(graphsharp:GraphCanvas.X)" />
+                               Path="Source.(graphshape:GraphCanvas.X)" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                               Path="Source.(graphsharp:GraphCanvas.Y)" />
+                               Path="Source.(graphshape:GraphCanvas.Y)" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                Path="Source.ActualWidth" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                Path="Source.ActualHeight" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                               Path="Target.(graphsharp:GraphCanvas.X)" />
+                               Path="Target.(graphshape:GraphCanvas.X)" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                               Path="Target.(graphsharp:GraphCanvas.Y)" />
+                               Path="Target.(graphshape:GraphCanvas.Y)" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                Path="Target.ActualWidth" />
                       <Binding RelativeSource="{RelativeSource TemplatedParent}"

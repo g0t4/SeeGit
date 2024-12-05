@@ -46,14 +46,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\GraphSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GraphSharp.Controls, Version=1.0.4115.29430, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\GraphSharp.Controls.dll</HintPath>
-    </Reference>
+    <PackageReference Include="GraphShape" Version="1.2.1" />
+    <PackageReference Include="GraphShape.Controls" Version="1.2.1" />
     <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Microsoft.Contracts.dll</HintPath>
