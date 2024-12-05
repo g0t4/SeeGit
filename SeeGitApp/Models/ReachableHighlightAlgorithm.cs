@@ -16,6 +16,9 @@ namespace SeeGit.Models
 
         private void ClearAllHighlights()
         {
+            // FYI reachable highlights are not quite working yet though not that big of a deal IMO.. just the blue line when hovering over the graph, so lets focus on why layout isn't working quite right first
+            //   TODO blue reachables are pointed at wrong shapes and not always updating as they would in v1.0.1/v1.1
+
             // OMG do I need to lock before clearing and removing items?
             ClearSemiHighlights();
             // TODO what are all the warnings here about modified collections and cannot finish enumeration, add those back (user unhandled), right now I ignored them just to test app out
