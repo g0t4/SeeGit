@@ -6,8 +6,7 @@ namespace SeeGit.Models
     public class ReachableHighlightAlgorithm<TVertex, TEdge, TGraph> :
         HighlightAlgorithmBase<TVertex, TEdge, TGraph, IHighlightParameters> where TVertex : class
                                                                              where TEdge : IEdge<TVertex>
-                                                                             where TGraph : class,
-                                                                                 IBidirectionalGraph<TVertex, TEdge>
+                                                                             where TGraph : class, IBidirectionalGraph<TVertex, TEdge>
     {
         // Methods
         public ReachableHighlightAlgorithm(IHighlightController<TVertex, TEdge, TGraph> controller,
