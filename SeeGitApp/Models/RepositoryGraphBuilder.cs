@@ -99,7 +99,10 @@
             var staged = new StagedVertex();
             _contents.AddVertex(staged);
             // TODO do I need to query for files to also get deleted/renamed? me thinks so?
-            _repository.Index.ForEach(e => AddStagedEntry(e, staged));
+            //_repository.Index.ForEach(e => AddStagedEntry(e, staged));
+            _repository.RetrieveStatus(new StatusOptions { DetectRenamesInIndex = true })
+                       .Where(e => new[] { FileStatus.NewInIndex, FileStatus.ModifiedInIndex, FileStatus.DeletedFromIndex, FileStatus.RenamedInIndex }.Contains(e.State))
+                       .ForEach(e => AddStagedEntry(e, staged));
 
             // resolve ref chain (i.e. HEAD => master => commit, or detached HEAD => commit, etc. ):
             var headCommitId = _repository.Head.Reference.ResolveToDirectReference().TargetIdentifier; // this is the commit sha
@@ -107,15 +110,16 @@
             _contents.AddEdge(toFutureParentCommit);
         }
 
-        private void AddStagedEntry(IndexEntry entry, StagedVertex staged)
+        private void AddStagedEntry(StatusEntry entry, StagedVertex staged)
         {
             // goal is to show new files in stage (100% new, modified, or deleted)
             // TODO deleting a file is not represented when showing commit content.. .hrm in this case maybe give the green box a new id here to make it win?
-            var status = _repository.RetrieveStatus(entry.Path);
-            var entryVertex = new StagedEntryVertex(entry, status);
+            var indexEntry = _repository.Index.FirstOrDefault(i => i.Path == entry.FilePath);
+            var entryVertex = new StagedEntryVertex(entry, entry.State, indexEntry?.Id.Sha ?? "deleted" + entry.FilePath);
             _contents.AddVertex(entryVertex); // BTW if the staged file (new/modified) matches content in another existing object already in git obj db then it will win out and wont show green box in that case
-            var tag = _parameters.IncludeCommitContent ? entry.Path : "";
-            _contents.AddEdge(new GraphContents.Edge { Source = staged.Key, Target = entryVertex.Key, Tag = tag });
+            //var tag = _parameters.IncludeCommitContent ? entry.FilePath : "";
+            // take tag off for now b/c only time I want it is if a new file in stage matches verbatim an object in the repo already (not likely) and otherwise I dont want names duplicated so yeah lets leave it off for now
+            _contents.AddEdge(new GraphContents.Edge { Source = staged.Key, Target = entryVertex.Key });
         }
 
         private void AddUnreachableCommits()

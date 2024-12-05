@@ -4,15 +4,41 @@
 
     public class StagedEntryVertex : ObjectVertex
     {
-        public StagedEntryVertex(IndexEntry entry, FileStatus status) : base(
-                status == FileStatus.DeletedFromIndex ? "deleted" + entry.Id.Sha : entry.Id.Sha)
+        public StagedEntryVertex(StatusEntry entry, FileStatus status, string id) : base(id)
         {
             State = status;
-            Path = entry.Path;
+            Path = entry.FilePath;
         }
 
         public string Path { get; set; }
         public FileStatus State { get; set; }
+
+        public string AbbreviatedStatus
+        {
+            get
+            {
+                if (State == FileStatus.NewInIndex)
+                    return "New";
+                if (State == FileStatus.RenamedInIndex)
+                    return "Renamed";
+                if (State == FileStatus.ModifiedInIndex)
+                    return "Modified";
+                if (State == FileStatus.DeletedFromIndex)
+                    return "Deleted";
+                // TODO more?
+                return State.ToString();
+            }
+        }
+
+        public string Color
+        {
+            get
+            {
+                if (State == FileStatus.DeletedFromIndex)
+                    return "Red";
+                return "LightBlue";
+            }
+        }
     }
 
 }

@@ -95,13 +95,13 @@
 
       <DataTemplate x:Key="StagedEntryVertexTemplate" DataType="{x:Type vertices:StagedEntryVertex}">
         <Border BorderBrush="Black"
-                Background="LightGreen"
+                Background="{Binding Color, Mode=OneTime}"
                 BorderThickness="0"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
             <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
             <TextBlock Text="{Binding Path, Mode=OneWay}" Foreground="Black" />
-            <TextBlock Text="{Binding State, Mode=OneWay}" Foreground="Black" />
+            <TextBlock Text="{Binding AbbreviatedStatus, Mode=OneWay}" Foreground="Black" />
           </StackPanel>
         </Border>
       </DataTemplate>
