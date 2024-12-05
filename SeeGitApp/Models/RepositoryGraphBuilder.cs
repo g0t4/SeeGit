@@ -79,7 +79,7 @@
 
         private void AddCommit(string commitSha)
         {
-            var commit = _repository.Lookup(commitSha, GitObjectType.Commit) as Commit;
+            var commit = _repository.Lookup(commitSha, ObjectType.Commit) as Commit;
             AddCommit(commit);
         }
 
