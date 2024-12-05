@@ -46,7 +46,7 @@ namespace SeeGit.Models
         public override bool OnEdgeHighlighting(TEdge edge)
         {
             ClearAllHighlights();
-            if (Equals(edge, default(TEdge)) || !Controller.Graph.ContainsEdge(edge))
+            if (Equals(edge, default) || !Controller.Graph.ContainsEdge(edge))
             {
                 return false;
             }
