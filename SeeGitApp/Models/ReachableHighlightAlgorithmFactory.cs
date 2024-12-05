@@ -27,7 +27,11 @@ namespace SeeGit.Models
 
         public IHighlightParameters CreateParameters(string highlightMode, IHighlightParameters oldParameters)
         {
+            // TODO what are all the unhandled exceptions for collections modified in algorithm?
             // TODO does this work?!
+            // FYI notes about layout issues => seems like its may a vertical offset problem? zoom out and refresh and they all line up in a row but no vertical differences
+            // 
+            //    this is one thing I don't know if it matters: was some HighlightParametersBase() previously in QuickShape
             return new HighlightParameters();
         }
 

@@ -17,6 +17,7 @@ namespace SeeGit.Models
         private void ClearAllHighlights()
         {
             ClearSemiHighlights();
+            // TODO what are all the warnings here about modified collections and cannot finish enumeration, add those back (user unhandled), right now I ignored them just to test app out
             foreach (TVertex local in Controller.HighlightedVertices)
             {
                 Controller.RemoveHighlightFromVertex(local);
@@ -29,6 +30,8 @@ namespace SeeGit.Models
 
         private void ClearSemiHighlights()
         {
+            // TODO what are all the warnings here about modified collections and cannot finish enumeration, add those back (user unhandled), right now I ignored them just to test app out
+            //   FYI definitely happened often on SemiHighlightedVertices:
             foreach (var vertex in Controller.SemiHighlightedVertices)
             {
                 Controller.RemoveSemiHighlightFromVertex(vertex);

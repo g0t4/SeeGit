@@ -19,11 +19,12 @@ I'd like to port this to net8+, here are some observations:
 - DotNetExtensions-Base should work fine with netstandard/shims (very basics of BCL net fwk)
 - LibGit2Sharp has arm and xplat builds and binaries so good to go there, all for like net8
 - GraphSharp has ports too?
+	- Using GraphShape 1.2.1 and its working so far
 	- https://www.nuget.org/packages/GraphSharp.Core
 	- etc (check nuget)
 - QuickGraph has several ports (heavy usage):
+	- USING https://www.nuget.org/packages/QuikGraph
 	- https://www.nuget.org/packages/Sandwych.QuickGraph.Core
-	- https://www.nuget.org/packages/QuikGraph
 - WPF xplat => MAUI?
 
 ## Goal
