@@ -91,13 +91,15 @@
             // align the point so that it  passes through the center of the label content
             // hard to see solo / (below every commit) so offset it slightly from the line
             // enable Commit Content to see this
-            var shift = this.Content?.ToString() == "/" ? 5 : 0;
+            var shift = this.Content?.ToString() == "/" ? 7 : 0;
             var desiredSize = DesiredSize;
             p1.Offset(-desiredSize.Width / 2 - shift, -desiredSize.Height / 2);
 
-            var rotationAngle = 45; // Specify the rotation angle in degrees
-            var rotateTransform = new RotateTransform(rotationAngle);
-            RenderTransform = rotateTransform;
+            // todo ensure rotated label isn't past the arrow...
+            // make label perpendicular to arrow it aligns with?
+            //var rotationAngle = 0; // Specify the rotation angle in degrees
+            //var rotateTransform = new RotateTransform(rotationAngle);
+            //RenderTransform = rotateTransform;
 
             // TODO hover file => `git show a3cb` its content if its plaintext?
 
