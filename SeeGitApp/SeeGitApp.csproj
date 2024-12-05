@@ -179,7 +179,7 @@
     <PackageReference Include="DotNetExtensions-Base">
       <Version>1.1.4713.27166</Version>
     </PackageReference>
-    <PackageReference Include="LibGit2Sharp" Version="0.26.2" />
+    <PackageReference Include="LibGit2Sharp" Version="0.29.0" />
     <PackageReference Include="Rx_Experimental-Main">
       <Version>1.1.11111</Version>
     </PackageReference>
