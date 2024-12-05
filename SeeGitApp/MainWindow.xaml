@@ -55,9 +55,17 @@
           Unreachable Commits
         </CheckBox>
         <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
-                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeIndex}">
+                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeStaged}">
           Index
-        </CheckBox>        
+        </CheckBox>
+        <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeWorkTree}">
+                    Working Tree
+        </CheckBox>
+        <CheckBox Background="Gray" Foreground="White" HorizontalAlignment="Right" Margin="10 2 0 2" Padding="3"
+                  Command="Refresh" IsChecked="{Binding GraphParameters.IncludeStashes}">
+                    TODO Stashes
+        </CheckBox>
       </StackPanel>
     </StackPanel>
 

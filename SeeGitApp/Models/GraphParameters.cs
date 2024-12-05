@@ -8,5 +8,12 @@
         public bool IncludeStaged { get; set; }
         // TODO impl work tree like index (staged)
         public bool IncludeWorkTree { get; set; }
+
+        // TODO stashes?
+        public bool IncludeStashes { get; set; }
+
+        // TODO reflog mode?!
+
+        // TODO others?
     }
 }
