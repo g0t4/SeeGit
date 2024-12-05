@@ -9,7 +9,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type graphshape:EdgeControl}">
           <Canvas>
-            <Path Stroke="Black"
+            <Path Stroke="{TemplateBinding Foreground}"
                   StrokeThickness="1"
                   MinWidth="1"
                   MinHeight="1"
