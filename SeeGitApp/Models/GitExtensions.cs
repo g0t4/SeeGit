@@ -27,6 +27,7 @@ namespace SeeGit.Models
                                     .Where(r => r.StartsWith("unreachable commit"))
                                     .Select(r => r.Replace("unreachable commit", String.Empty).Trim());
             process.WaitForExit();
+            // PRN throw on non-zero exit code? i.e. if git repo trust issue with git repo when run git fsck
             return commitShas;
         }
     }
