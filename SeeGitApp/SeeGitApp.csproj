@@ -102,8 +102,6 @@
     </ApplicationDefinition>
     <Compile Include="Bases\NotifyPropertyChanged.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
-    <Compile Include="Extensions\CommitTemplatedAdorner.cs" />
-    <Compile Include="Extensions\CommitAdornerBehavior.cs" />
     <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
@@ -188,9 +186,6 @@
       <Version>1.1.4713.27166</Version>
     </PackageReference>
     <PackageReference Include="LibGit2Sharp" Version="0.10.0" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
-      <Version>1.1.135</Version>
-    </PackageReference>
     <PackageReference Include="Rx_Experimental-Main">
       <Version>1.1.11111</Version>
     </PackageReference>
