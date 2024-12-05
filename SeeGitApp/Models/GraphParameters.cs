@@ -4,8 +4,8 @@
     {
         public bool IncludeCommitContent { get; set; }
         public bool IncludeUnreachableCommits { get; set; }
-        public bool IncludeStaged { get; set; }
-        public bool IncludeWorkTrees { get; set; } = true;
+        public bool IncludeStaged { get; set; } = false;
+        public bool IncludeWorkTrees { get; set; } = false;
         // TODO stashes?
         public bool IncludeStashes { get; set; }
 

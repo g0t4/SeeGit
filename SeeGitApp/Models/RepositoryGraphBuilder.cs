@@ -63,15 +63,28 @@
             _contents.AddVertex(workTreeVertex);
             foreach (var file in files)
             {
-                // TODO ok so is there a way to get the object Id before checked in? if not get rid of object id and use speical type for work tree entries
-                var vertex = new WorkTreeEntryVertex(file.FilePath, file.State);
-                _contents.AddVertex(vertex);
-                _contents.AddEdge(new GraphContents.Edge { Source = workTreeVertex.Key, Target = vertex.Key });
+                if (file.State == FileStatus.NewInIndex || file.State == FileStatus.ModifiedInIndex || file.State == FileStatus.RenamedInIndex || file.State == FileStatus.DeletedFromIndex)
+                {
+                    // don't add index only file statuses... TODO hrm if something is in index and in work tree with changes that differ. Is it returned twice?
+                    continue;
+                }
+
+                // TODO if deleted in worktree... skip object id or?!
+                // TODO later on spend some time on edge cases here... I dont wanna do this all day, gotta stop soon
+
+                // treat renamed the same as new/changed, just use contents to lookup id each time
+                // get sha for the new/changed file:
+                using (var stream = System.IO.File.OpenRead(System.IO.Path.Combine(_repository.Info.WorkingDirectory, file.FilePath)))
+                {
+                    // FYI this is expensive but should happen rarely? I COULD add caching based on file path + timestamp of last edit? would that even help in most cases? remember this is for demo purposes... ONLY OPTIMIZE if I NOTICE THE ISSUE
+                    // TODO can I just pass a path to ObjectDatabase to read the file for me too?
+                    var blob = _repository.ObjectDatabase.CreateBlob(stream);
+                    var objectId = blob.Sha;
+                    var vertex = new WorkTreeEntryVertex(objectId, file.FilePath, file.State);
+                    _contents.AddVertex(vertex);
+                    _contents.AddEdge(new GraphContents.Edge { Source = workTreeVertex.Key, Target = vertex.Key });
+                }
             }
-            // show files that are not committed, IIAC they still are like committed objects?
-            //AddCommit(tree.Head.Tip);
-            //var edge = new GraphContents.Edge { Source = tree.Head.Tip.Sha, Target = tree.Sha, Tag = "worktree" };
-            //_contents.AddEdge(edge);
         }
 
         private void AddStagedPreCommitCommit()

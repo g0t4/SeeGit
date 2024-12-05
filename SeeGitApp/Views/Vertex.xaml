@@ -122,8 +122,7 @@
                 BorderThickness="1"
                 Padding="0">
           <StackPanel Orientation="Vertical" Margin="4 1 4 2">
-            <!-- TODO add back object id SHA if applicable to work treee entries too -->
-            <!--<TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />-->
+            <TextBlock Text="{Binding ShortSha, Mode=OneWay}" Foreground="Black" />
             <TextBlock Text="{Binding Path, Mode=OneWay}" Foreground="Black" />
             <TextBlock Text="{Binding State, Mode=OneWay}" Foreground="Black" />
           </StackPanel>
