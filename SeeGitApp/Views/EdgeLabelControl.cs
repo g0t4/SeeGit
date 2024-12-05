@@ -33,11 +33,6 @@
             return Math.Sqrt(Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2));
         }
 
-        private static double GetLabelDistance(double edgeLength)
-        {
-            return edgeLength / 2; // set the label halfway the length of the edge
-        }
-
         private void EdgeLabelControl_LayoutUpdated(object sender, EventArgs e)
         {
             if (!IsLoaded)
@@ -54,21 +49,23 @@
             var routePoints = edgeControl.RoutePoints;
             if (routePoints == null)
                 // the edge is a single segment (p1,p2)
-                edgeLength = GetLabelDistance(GetDistanceBetweenPoints(p1, p2));
+                edgeLength = GetDistanceBetweenPoints(p1, p2) * 0.5; // half way
             else
             {
                 // the edge has one or more segments
                 // compute the total length of all the segments
                 edgeLength = 0;
                 for (var i = 0; i <= routePoints.Length; ++i)
+                    // layout: p1 => ...routePoints => p2
                     if (i == 0)
                         edgeLength += GetDistanceBetweenPoints(p1, routePoints[0]);
                     else if (i == routePoints.Length)
                         edgeLength += GetDistanceBetweenPoints(routePoints[routePoints.Length - 1], p2);
                     else
                         edgeLength += GetDistanceBetweenPoints(routePoints[i - 1], routePoints[i]);
+
                 // find the line segment where the half distance is located
-                edgeLength = GetLabelDistance(edgeLength);
+                edgeLength = edgeLength * 0.5; // half way
                 var newp1 = p1;
                 var newp2 = p2;
                 for (var i = 0; i <= routePoints.Length; ++i)
