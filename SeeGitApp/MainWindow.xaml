@@ -72,7 +72,7 @@
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
       <models:RepositoryGraphLayout x:Name="GraphLayout" Margin="10" Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}"
-                                    OverlapRemovalAlgorithmType="FSA"
+                                    OverlapRemovalAlgorithmType="{Binding OverlapRemovalAlgorithmType, Mode=OneTime}"
                                     FlowDirection="LeftToRight" />
     </zoom:ZoomControl>
   </Grid>

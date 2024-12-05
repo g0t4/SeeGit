@@ -5,11 +5,11 @@
     using QuikGraph;
     using Vertices;
 
-	public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>
+    public class RepositoryGraph : BidirectionalGraph<GitVertex, GitEdge>
     {
         public RepositoryGraph()
         {
-            LayoutAlgorithmType = "Tree";
+            LayoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
         }
 
         public string LayoutAlgorithmType { get; set; }
@@ -18,9 +18,9 @@
         {
             if (Vertices.Count() > 1)
             {
-                // TODO back to EfficientSugiyama
-                LayoutAlgorithmType = "Tree";
+                LayoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
             }
+            // else?
         }
 
         public void Set(GraphContents contents)

@@ -33,7 +33,9 @@
             graph.AddEdge(new GitEdge(commits[1], commits[2], null));
             graph.AddEdge(new GitEdge(commits[0], commits[1], null));
             graph.AddEdge(new GitEdge(commits[3], commits[2], null));
-            graph.LayoutAlgorithmType = "EfficientSugiyama";
+
+            graph.LayoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
+
             return graph;
         }
     }

@@ -14,9 +14,9 @@
         private GraphParameters _graphParameters = new GraphParameters();
 
         private IRepositoryGraphBuilder _graphBuilder;
-        // Tree, LinLog, KK, ISOM, EfficientSugiyama, FR, CompoundFDP, BoundedFR, Circular
 
-        private string _layoutAlgorithmType = "Tree";
+        private string _layoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
+
         private readonly Dispatcher _uiDispatcher;
         private readonly Func<string, IRepositoryGraphBuilder> _graphBuilderThunk;
 
@@ -36,6 +36,8 @@
             }
         }
 
+        //  doesn't change for now, just define in real code
+        public string OverlapRemovalAlgorithmType => StandardOverlapRemovalAlgorithms.FSA;
         public RepositoryGraph Graph
         {
             get { return _graph; }
@@ -112,7 +114,7 @@
 
         public void Refresh()
         {
-			// todo can't we split updating the UI from reading the repo and run this on a background thread?
+            // todo can't we split updating the UI from reading the repo and run this on a background thread?
             Graph = _graphBuilder.Graph(GraphParameters);
         }
     }
