@@ -72,8 +72,9 @@
     <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="#ff656565">
       <models:RepositoryGraphLayout x:Name="GraphLayout" Margin="10" Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding LayoutAlgorithmType, Mode=OneWay}"
-                                    OverlapRemovalAlgorithmType="{Binding OverlapRemovalAlgorithmType, Mode=OneTime}"
                                     FlowDirection="LeftToRight" />
-    </zoom:ZoomControl>
+            <!-- layout algo is not working when bound and so must be ignored otherwise? like you can set ="Foo" here and it works (ignores it) so F it for now it isn't matter so far 
+                    OverlapRemovalAlgorithmType="{Binding OverlapRemovalAlgorithmType, Mode=OneTime}" -->
+        </zoom:ZoomControl>
   </Grid>
 </Window>
