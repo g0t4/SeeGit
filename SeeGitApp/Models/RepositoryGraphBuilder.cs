@@ -99,8 +99,8 @@
             _repository.Index.ForEach(e => AddStagedEntry(e, staged));
 
             // resolve ref chain (i.e. HEAD => master => commit, or detached HEAD => commit, etc. ):
-            var headCommitSha = _repository.Head.Reference.ResolveToDirectReference().TargetIdentifier; // this is the commit sha
-            var toFutureParentCommit = new GraphContents.Edge { Source = staged.Key, Target = headCommitSha };
+            var headCommitId = _repository.Head.Reference.ResolveToDirectReference().TargetIdentifier; // this is the commit sha
+            var toFutureParentCommit = new GraphContents.Edge { Source = staged.Key, Target = headCommitId };
             _contents.AddEdge(toFutureParentCommit);
         }
 
