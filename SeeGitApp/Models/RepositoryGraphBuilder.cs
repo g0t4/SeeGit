@@ -85,6 +85,8 @@
                     _contents.AddEdge(new GraphContents.Edge { Source = workTreeVertex.Key, Target = vertex.Key });
                 }
             }
+
+            // TODO, link WorkTree vertex with an edge to Staged to show chain of changes?
         }
 
         private void AddStagedPreCommitCommit()
@@ -103,7 +105,6 @@
             var toFutureParentCommit = new GraphContents.Edge { Source = staged.Key, Target = headCommitId };
             _contents.AddEdge(toFutureParentCommit);
         }
-
 
         private void AddStagedEntry(IndexEntry entry, StagedVertex staged)
         {
