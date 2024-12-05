@@ -95,6 +95,10 @@
             var desiredSize = DesiredSize;
             p1.Offset(-desiredSize.Width / 2 - shift, -desiredSize.Height / 2);
 
+            var rotationAngle = 45; // Specify the rotation angle in degrees
+            var rotateTransform = new RotateTransform(rotationAngle);
+            RenderTransform = rotateTransform;
+
             // TODO hover file => `git show a3cb` its content if its plaintext?
 
             // move it "edgLength" on the segment
