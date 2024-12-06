@@ -52,6 +52,11 @@
             return Path.Combine(path, GitDirectoryName);
         }
 
+        /// <summary>
+        /// Creates an observable that will fire when the git repo is created (if it doesn't yet exist), mostly to show what happens instantly when a new repo is created.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryCreationObservable(string path)
         {
             var expectedGitDirectory = Path.Combine(path, GitDirectoryName);
@@ -69,6 +74,11 @@
             // todo perhaps we want a small throttle window and reset the window each time we get a change notification, like a BufferUntilCalm
         }
 
+        /// <summary>
+        /// Observable for fs change events in the git repository
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static IObservable<FileSystemEventArgs> CreateGitRepositoryChangesObservable(string path)
         {
             return new FileSystemWatcher(path)
