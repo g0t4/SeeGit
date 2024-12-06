@@ -23,4 +23,17 @@
         public const string FSA = "FSA";
         public const string OneWayFSA = "OneWayFSA";
     }
+
+    public static class Extensions
+    {
+        public static string AtMost(this string s, int characterCount)
+        {
+            if (s == null) return null;
+            if (s.Length <= characterCount)
+            {
+                return s;
+            }
+            return s.Substring(0, characterCount);
+        }
+    }
 }

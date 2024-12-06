@@ -87,7 +87,6 @@
     <Compile Include="Bases\NotifyPropertyChanged.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Extensions\Constants.cs" />
-    <Compile Include="Extensions\ModelExtensions.cs" />
     <Compile Include="Models\GitExtensions.cs" />
     <Compile Include="Models\Vertices\BlobVertex.cs" />
     <Compile Include="Models\Vertices\CommitVertex.cs" />
