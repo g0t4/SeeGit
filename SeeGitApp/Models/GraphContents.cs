@@ -1,7 +1,7 @@
 ﻿namespace SeeGit.Models
 {
     using System.Collections.Generic;
-    using BclExtensionMethods;
+    using System.Linq;
     using Vertices;
 
 	public class GraphContents
@@ -44,10 +44,11 @@
             var edges = new Dictionary<string, GitEdge>();
             Edges
                 .Values
+                .ToList() // just for ForEach
                 .ForEach(e =>
                     {
-                        var source = Vertices.GetValueOrDefault(e.Source);
-                        var target = Vertices.GetValueOrDefault(e.Target);
+                        var source = Vertices.ContainsKey(e.Source) ? Vertices[e.Source] : null;
+                        var target = Vertices.ContainsKey(e.Target) ? Vertices[e.Target] : null;
                         if (source == null || target == null)
                         {
                             return;
