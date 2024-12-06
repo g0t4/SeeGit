@@ -4,6 +4,7 @@
     using System.IO;
     using System.Windows;
     using System.Windows.Input;
+    using Microsoft.WindowsAPICodePack.Dialogs;
     using Models;
 
     public partial class MainWindow : Window
@@ -33,5 +34,28 @@
         {
             _viewModel.MonitorRepository(_viewModel.RepositoryPath);
         }
+        
+        public static class WindowsExtensions
+        {
+            private static string _lastDirectory;
+
+            public static string BrowseForFolder(string startingPath)
+            {
+                var cfd = new CommonOpenFileDialog
+                {
+                    InitialDirectory = _lastDirectory ?? startingPath,
+                    IsFolderPicker = true,
+                };
+
+                if (cfd.ShowDialog() == CommonFileDialogResult.Ok)
+                    _lastDirectory = Path.GetDirectoryName(cfd.FileName);
+                else
+                    return null;
+
+                var ret = cfd.FileName;
+                return ret;
+            }
+        }
+
     }
 }
