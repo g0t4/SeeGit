@@ -15,8 +15,6 @@
 
         private IRepositoryGraphBuilder _graphBuilder;
 
-        private string _layoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
-
         private readonly Dispatcher _uiDispatcher;
         private readonly Func<string, IRepositoryGraphBuilder> _graphBuilderThunk;
 
@@ -25,26 +23,16 @@
             _uiDispatcher = uiDispatcher;
             _graphBuilderThunk = graphBuilderThunk ?? (path => new RepositoryGraphBuilder(path));
         }
-
-        public string LayoutAlgorithmType
-        {
-            get { return _layoutAlgorithmType; }
-            private set
-            {
-                _layoutAlgorithmType = value;
-                RaisePropertyChanged(() => LayoutAlgorithmType);
-            }
-        }
-
+        public string LayoutAlgorithmType => StandardLayoutAlgorithms.Sugiyama;
         //  doesn't change for now, just define in real code
         public string OverlapRemovalAlgorithmType => StandardOverlapRemovalAlgorithms.FSA;
+
         public RepositoryGraph Graph
         {
             get { return _graph; }
             set
             {
                 _graph = value;
-                LayoutAlgorithmType = _graph.LayoutAlgorithmType;
                 RaisePropertyChanged(() => Graph);
             }
         }
@@ -93,7 +81,6 @@
             _graphBuilder = _graphBuilderThunk(gitPath);
             RepositoryPath = Directory.GetParent(gitPath).FullName;
             RepoDisplayName = Directory.GetParent(gitPath).Name;
-            LayoutAlgorithmType = "Tree";
 
             Refresh();
 

@@ -9,18 +9,6 @@
     {
         public RepositoryGraph()
         {
-            LayoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
-        }
-
-        public string LayoutAlgorithmType { get; set; }
-
-        private void SetLayoutType()
-        {
-            if (Vertices.Count() > 1)
-            {
-                LayoutAlgorithmType = StandardLayoutAlgorithms.Sugiyama;
-            }
-            // else?
         }
 
         public void Set(GraphContents contents)
@@ -30,7 +18,6 @@
                     .ForEach(v => AddVertex(v));
             contents.GetEdges()
                     .ForEach(e => AddEdge(e));
-            SetLayoutType();
         }
     }
 }
