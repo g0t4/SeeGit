@@ -2,9 +2,9 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Reactive.Linq;
     using System.Windows.Threading;
-    using BclExtensionMethods;
     using Models;
 
     public class MainWindowViewModel : NotifyPropertyChanged
@@ -175,10 +175,13 @@
                 EnableRaisingEvents = true,
                 NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.DirectoryName
             }.ObserveFileSystemCreateEvents()
-                 .Where(
-                     e =>
-                     e.ChangeType.In(WatcherChangeTypes.Created, WatcherChangeTypes.Deleted) &&
-                     e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase))
+                 .Where(e =>
+                            // todo bump to c#9 and use pattern matching
+                            // (e.ChangeType is WatcherChangeTypes.Created or WatcherChangeTypes.Deleted)
+                            new[] { WatcherChangeTypes.Created, WatcherChangeTypes.Deleted }.Contains(e.ChangeType)
+
+                            && e.FullPath.Equals(expectedGitDirectory, StringComparison.OrdinalIgnoreCase)
+                       )
                  .Throttle(TimeSpan.FromMilliseconds(250));
             // todo perhaps we want a small throttle window and reset the window each time we get a change notification, like a BufferUntilCalm
         }
