@@ -1,7 +1,5 @@
 ﻿namespace SeeGit.Models
 {
-    using System.Linq;
-    using BclExtensionMethods;
     using QuikGraph;
     using Vertices;
 

@@ -44,7 +44,6 @@
             var edges = new Dictionary<string, GitEdge>();
             Edges
                 .Values
-                .ToList() // just for ForEach
                 .ForEach(e =>
                     {
                         var source = Vertices.ContainsKey(e.Source) ? Vertices[e.Source] : null;
