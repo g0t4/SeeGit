@@ -167,9 +167,6 @@
     <Resource Include="Images\directory.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotNetExtensions-Base">
-      <Version>1.1.4713.27166</Version>
-    </PackageReference>
     <PackageReference Include="LibGit2Sharp" Version="0.31.0" />
     <PackageReference Include="System.Reactive" Version="6.0.0" />
   </ItemGroup>
