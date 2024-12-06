@@ -52,6 +52,22 @@
             return Path.Combine(path, GitDirectoryName);
         }
 
+        public static IObservable<FileSystemEventArgs> ObserveFileSystemCreateEvents(this FileSystemWatcher watcher)
+        {
+            return Observable.FromEventPattern<FileSystemEventHandler, FileSystemEventArgs>(
+                h => watcher.Created += h,
+                h => watcher.Created -= h)
+                .Select(e => e.EventArgs);
+        }
+
+        public static IObservable<FileSystemEventArgs> ObserveFileSystemChangeEvents(this FileSystemWatcher watcher)
+        {
+            return Observable.FromEventPattern<FileSystemEventHandler, FileSystemEventArgs>(
+                h => watcher.Changed += h,
+                h => watcher.Changed -= h)
+                .Select(e => e.EventArgs);
+        }
+
         /// <summary>
         /// Creates an observable that will fire when the git repo is created (if it doesn't yet exist), mostly to show what happens instantly when a new repo is created.
         /// </summary>
