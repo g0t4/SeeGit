@@ -1,6 +1,7 @@
 ﻿namespace SeeGit.Models.Vertices
 {
     using LibGit2Sharp;
+    using System.Windows.Media;
 
     public class StagedEntryVertex : ObjectVertex
     {
@@ -35,8 +36,8 @@
             get
             {
                 if (State == FileStatus.DeletedFromIndex)
-                    return "Red";
-                return "LightBlue";
+                    return Colors.PaleVioletRed.ToString();
+                return Colors.LightBlue.ToString();
             }
         }
     }
