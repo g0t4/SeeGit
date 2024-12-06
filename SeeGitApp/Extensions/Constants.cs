@@ -1,4 +1,6 @@
-﻿namespace SeeGit
+﻿using System.Collections.Generic;
+
+namespace SeeGit
 {
     public static class StandardLayoutAlgorithms
     {
@@ -34,6 +36,11 @@
                 return s;
             }
             return s.Substring(0, characterCount);
+        }
+
+        public static string StringJoin<T>(this IEnumerable<T> source, string separator)
+        {
+            return string.Join(separator, source);
         }
     }
 }

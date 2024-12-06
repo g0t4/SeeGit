@@ -2,14 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using BclExtensionMethods;
     using QuikGraph;
     using Vertices;
 
-	public class GitEdge : TaggedEdge<GitVertex, IList<string>>
+    public class GitEdge : TaggedEdge<GitVertex, IList<string>>
     {
         public GitEdge(GitVertex source, GitVertex target, string tag)
-            : base(source, target, (tag == null ? new string[] {} : new[] {tag}).ToList())
+            : base(source, target, (tag == null ? new string[] { } : new[] { tag }).ToList())
         {
             SourceKey = source.Key;
             TargetKey = target.Key;
@@ -48,14 +47,14 @@
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((GitEdge) obj);
+            return Equals((GitEdge)obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((TargetKey != null ? TargetKey.GetHashCode() : 0)*397) ^ (SourceKey != null ? SourceKey.GetHashCode() : 0);
+                return ((TargetKey != null ? TargetKey.GetHashCode() : 0) * 397) ^ (SourceKey != null ? SourceKey.GetHashCode() : 0);
             }
         }
     }
